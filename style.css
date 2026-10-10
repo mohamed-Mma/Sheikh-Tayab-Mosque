@@ -1,0 +1,850 @@
+/* ========================================
+   مسجد الشيخ الطيب - التصميم الأساسي
+======================================== */
+
+:root {
+    --green-dark: #173f32;
+    --green-main: #245642;
+    --green-light: #eaf1eb;
+    --cream: #f8f5ee;
+    --beige: #e9d7b7;
+    --gold: #b99a5b;
+    --white: #ffffff;
+    --text-dark: #25332c;
+    --text-muted: #737d76;
+    --border: #e7e8e2;
+    --shadow: 0 12px 35px rgba(23, 63, 50, 0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
+
+body {
+    font-family: "Cairo", sans-serif;
+    background: var(--white);
+    color: var(--text-dark);
+    line-height: 1.8;
+    direction: rtl;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+.container {
+    width: min(1160px, 90%);
+    margin-inline: auto;
+}
+
+
+/* ========================================
+   HEADER
+======================================== */
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.97);
+    border-bottom: 1px solid rgba(23, 63, 50, 0.08);
+    backdrop-filter: blur(12px);
+}
+
+.nav-container {
+    min-height: 86px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.logo-icon {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    background: var(--green-dark);
+    color: var(--gold);
+    border-radius: 14px;
+    font-size: 30px;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.7;
+}
+
+.logo-text strong {
+    color: var(--green-dark);
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.logo-text small {
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.navigation a {
+    font-size: 14px;
+    font-weight: 600;
+    color: #46554c;
+    transition: color 0.25s;
+}
+
+.navigation a:hover {
+    color: var(--gold);
+}
+
+.contact-button {
+    background: var(--green-dark);
+    color: var(--white);
+    padding: 11px 20px;
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: 700;
+    transition: 0.25s;
+}
+
+.contact-button:hover {
+    background: var(--green-main);
+    transform: translateY(-2px);
+}
+
+
+/* ========================================
+   HERO
+======================================== */
+
+.hero {
+    min-height: 590px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+
+    background-color: var(--green-dark);
+    background-image: url("images/mosque.jpg");
+    background-position: center 45%;
+    background-size: cover;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            270deg,
+            rgba(15, 43, 32, 0.94) 0%,
+            rgba(15, 43, 32, 0.79) 45%,
+            rgba(15, 43, 32, 0.24) 100%
+        );
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding-block: 90px;
+    color: var(--white);
+}
+
+.hero-label {
+    display: inline-block;
+    color: #e7d4a8;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    padding: 6px 15px;
+    border: 1px solid rgba(231, 212, 168, 0.4);
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.hero h1 {
+    font-size: clamp(35px, 5vw, 62px);
+    line-height: 1.45;
+    font-weight: 800;
+    max-width: 700px;
+    margin-bottom: 18px;
+}
+
+.hero h1 span {
+    display: block;
+    color: #e4cca0;
+}
+
+.hero-content > p {
+    max-width: 570px;
+    color: rgba(255, 255, 255, 0.87);
+    font-size: 16px;
+    line-height: 2.2;
+    margin-bottom: 30px;
+}
+
+.hero-buttons {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    flex-wrap: wrap;
+}
+
+.primary-button,
+.secondary-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 12px 25px;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 700;
+    transition: transform 0.25s, background 0.25s;
+}
+
+.primary-button {
+    color: var(--green-dark);
+    background: #e6d0a4;
+}
+
+.primary-button:hover {
+    background: #f0dfbd;
+    transform: translateY(-2px);
+}
+
+.secondary-button {
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.secondary-button:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.hero-decoration {
+    position: absolute;
+    z-index: 1;
+    left: 7%;
+    bottom: -100px;
+    font-size: 370px;
+    color: rgba(255, 255, 255, 0.06);
+    pointer-events: none;
+}
+
+
+/* ========================================
+   SECTION HEADINGS
+======================================== */
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 38px;
+}
+
+.section-label {
+    display: inline-block;
+    color: var(--green-main);
+    font-size: 13px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.section-heading h2,
+.about-content h2,
+.contact-content h2 {
+    color: var(--green-dark);
+    font-size: clamp(26px, 3vw, 36px);
+    font-weight: 800;
+    line-height: 1.5;
+}
+
+.section-heading > p {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+
+/* ========================================
+   PRAYER TIMES
+======================================== */
+
+.prayer-section {
+    padding-block: 85px;
+    background: var(--cream);
+}
+
+.prayer-date {
+    width: fit-content;
+    margin: -15px auto 28px;
+    color: var(--green-main);
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    padding: 8px 20px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.prayer-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.prayer-card {
+    text-align: center;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 27px 12px;
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.prayer-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+}
+
+.prayer-icon {
+    display: block;
+    font-size: 27px;
+    margin-bottom: 9px;
+}
+
+.prayer-card h3 {
+    color: var(--green-dark);
+    font-size: 17px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.prayer-card p {
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+.prayer-note {
+    text-align: center;
+    margin-top: 23px;
+    color: var(--text-muted);
+    font-size: 12px;
+    line-height: 2;
+}
+
+
+/* ========================================
+   ABOUT
+======================================== */
+
+.about-section {
+    padding-block: 100px;
+    background: var(--white);
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 75px;
+}
+
+.about-image {
+    position: relative;
+}
+
+.about-image > img {
+    width: 100%;
+    height: 390px;
+    object-fit: cover;
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+}
+
+.image-caption {
+    position: absolute;
+    bottom: 18px;
+    right: 18px;
+    left: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 17px;
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 700;
+    background: rgba(23, 63, 50, 0.92);
+    border-radius: 10px;
+}
+
+.about-content h2 {
+    margin-bottom: 22px;
+}
+
+.about-content > p {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 2.3;
+    margin-bottom: 15px;
+}
+
+.text-link {
+    display: inline-block;
+    margin-top: 13px;
+    color: var(--green-main);
+    font-size: 14px;
+    font-weight: 800;
+    transition: color 0.2s;
+}
+
+.text-link:hover {
+    color: var(--gold);
+}
+
+
+/* ========================================
+   ACTIVITIES
+======================================== */
+
+.activities-section {
+    padding-block: 90px;
+    background: var(--green-light);
+}
+
+.activities-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.activity-card {
+    padding: 32px 25px;
+    background: var(--white);
+    border: 1px solid rgba(23, 63, 50, 0.07);
+    border-radius: 16px;
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.activity-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+}
+
+.activity-icon {
+    width: 55px;
+    height: 55px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 20px;
+    background: var(--cream);
+    border-radius: 13px;
+    font-size: 26px;
+}
+
+.activity-card h3 {
+    color: var(--green-dark);
+    font-size: 19px;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.activity-card p {
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 2.2;
+}
+
+
+/* ========================================
+   CONTACT
+======================================== */
+
+.contact-section {
+    padding-block: 75px;
+    text-align: center;
+    background: var(--cream);
+}
+
+.contact-content > p {
+    color: var(--text-muted);
+    margin: 12px 0 25px;
+    font-size: 14px;
+}
+
+.contact-content .primary-button {
+    background: var(--green-dark);
+    color: var(--white);
+}
+
+.contact-content .primary-button:hover {
+    background: var(--green-main);
+}
+
+
+/* ========================================
+   FOOTER
+======================================== */
+
+.footer {
+    padding-block: 30px;
+    background: #112e24;
+    color: var(--white);
+}
+
+.footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.footer-content strong {
+    font-size: 15px;
+}
+
+.footer-content p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 12px;
+}
+
+.footer-content > div > p {
+    margin-top: 3px;
+}
+
+.footer-note {
+    text-align: center;
+}
+
+
+/* ========================================
+   RESPONSIVE - TABLETS
+======================================== */
+
+@media (max-width: 900px) {
+
+    .nav-container {
+        min-height: 75px;
+        flex-wrap: wrap;
+        padding-block: 12px;
+    }
+
+    .navigation {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        gap: 22px;
+        flex-wrap: wrap;
+    }
+
+    .navigation a {
+        font-size: 12px;
+    }
+
+    .contact-button {
+        font-size: 12px;
+    }
+
+    .hero {
+        min-height: 520px;
+    }
+
+    .prayer-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .about-grid {
+        gap: 35px;
+    }
+
+    .about-image > img {
+        height: 330px;
+    }
+
+    .activities-grid {
+        gap: 15px;
+    }
+
+    .activity-card {
+        padding: 25px 18px;
+    }
+
+}
+
+
+/* ========================================
+   RESPONSIVE - MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+
+    .container {
+        width: 92%;
+    }
+
+    .nav-container {
+        gap: 12px;
+    }
+
+    .logo-icon {
+        width: 42px;
+        height: 42px;
+        font-size: 26px;
+    }
+
+    .logo-text strong {
+        font-size: 14px;
+    }
+
+    .logo-text small {
+        font-size: 11px;
+    }
+
+    .navigation {
+        gap: 10px 17px;
+    }
+
+    .navigation a {
+        font-size: 11px;
+    }
+
+    .contact-button {
+        padding: 9px 12px;
+        font-size: 11px;
+    }
+
+    .hero {
+        min-height: 510px;
+        background-position: 58% center;
+    }
+
+    .hero-overlay {
+        background: rgba(15, 43, 32, 0.78);
+    }
+
+    .hero-content {
+        padding-block: 70px;
+    }
+
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .hero-content > p {
+        font-size: 13px;
+    }
+
+    .primary-button,
+    .secondary-button {
+        min-height: 44px;
+        padding: 10px 16px;
+        font-size: 12px;
+    }
+
+    .hero-decoration {
+        font-size: 220px;
+        bottom: -55px;
+    }
+
+    .prayer-section,
+    .activities-section {
+        padding-block: 60px;
+    }
+
+    .section-heading {
+        margin-bottom: 28px;
+    }
+
+    .section-heading h2,
+    .about-content h2,
+    .contact-content h2 {
+        font-size: 26px;
+    }
+
+    .prayer-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .prayer-card {
+        padding: 22px 8px;
+    }
+
+    .prayer-card h3 {
+        font-size: 15px;
+    }
+
+    .prayer-card p {
+        font-size: 11px;
+    }
+
+    .about-section {
+        padding-block: 65px;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .about-image > img {
+        height: 270px;
+    }
+
+    .about-content > p {
+        font-size: 13px;
+    }
+
+    .activities-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .activity-card {
+        padding: 25px;
+    }
+
+    .contact-section {
+        padding-block: 60px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 13px;
+    }
+
+}
+
+
+/* ========================================
+   ACCESSIBILITY
+======================================== */
+
+a:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}
+/* العد التنازلي للصلاة القادمة */
+.countdown-box {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 28px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #173f32, #245642);
+    color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(23, 63, 50, 0.15);
+}
+
+.countdown-label {
+    display: inline-block;
+    color: #e5c77b;
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+
+.countdown-box h3 {
+    font-size: 26px;
+    margin: 8px 0;
+}
+
+.countdown-description {
+    color: #e4e9e5;
+    font-size: 14px;
+    margin: 12px 0;
+}
+
+.countdown-timer {
+    color: #e5c77b;
+    font-size: clamp(32px, 7vw, 48px);
+    font-weight: 800;
+    letter-spacing: 3px;
+    margin-top: 12px;
+    font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 480px) {
+    .countdown-box {
+        padding: 22px 12px;
+    }
+
+    .countdown-box h3 {
+        font-size: 22px;
+    }
+}  
+.quran-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 14px;
+    background-color: #245642;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 13px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.quran-button:hover {
+    background-color: #173f32;
+} 
+/* زر الرجوع في صفحات القرآن */
+.quran-top-bar {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+
+.quran-back-button {
+    background-color: #245642;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.quran-back-button:hover {
+    background-color: #173f32;
+}

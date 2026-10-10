@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="الموقع الإلكتروني لمسجد الشيخ الطيب بمدينة الشروق">
+
+    <title>مسجد الشيخ الطيب | مدينة الشروق</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- رأس الموقع -->
+    <header class="header">
+        <div class="container nav-container">
+
+            <a href="#home" class="logo">
+                <span class="logo-icon">۞</span>
+                <span class="logo-text">
+                    <strong>مسجد الشيخ الطيب</strong>
+                    <small>مدينة الشروق</small>
+                </span>
+            </a>
+
+            <nav class="navigation">
+                <a href="#home">الرئيسية</a>
+                <a href="#about">عن المسجد</a>
+                <a href="#prayer">مواقيت الصلاة</a>
+                <a href="#activities">الأنشطة</a>
+            </nav>
+
+            <a href="#contact" class="contact-button">تواصل معنا</a>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- الواجهة الرئيسية -->
+        <section class="hero" id="home">
+
+            <div class="hero-overlay"></div>
+
+            <div class="container hero-content">
+
+                <span class="hero-label">أهلًا وسهلًا بكم</span>
+
+                <h1>
+                    مسجد الشيخ الطيب
+                    <span>مدينة الشروق</span>
+                </h1>
+
+                <p>
+                    بيت من بيوت الله، يجتمع فيه المسلمون على الصلاة
+                    والذكر وتعلُّم القرآن الكريم.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="#prayer" class="primary-button">
+                        مواقيت الصلاة
+                    </a>
+
+                    <a href="#about" class="secondary-button">
+                        تعرّف على المسجد
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="hero-decoration">۞</div>
+
+        </section>
+
+
+        <!-- مواقيت الصلاة -->
+        <section class="prayer-section" id="prayer">
+
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">الصلاة</span>
+                    <h2>مواقيت الصلاة</h2>
+                    <p>حافظ على صلاتك واجعل يومك عامرًا بذكر الله.</p>
+                </div>
+
+                <div class="prayer-date">
+    <span id="today-date">جارٍ تحميل التاريخ...</span>
+</div>
+
+<!-- العد التنازلي للصلاة القادمة -->
+<div class="countdown-box">
+    <span class="countdown-label">🕌 الصلاة القادمة</span>
+
+    <h3 id="next-prayer-name">جارٍ تحديد الصلاة القادمة...</h3>
+
+    <p class="countdown-description">الوقت المتبقي على الأذان</p>
+
+    <div class="countdown-timer" id="prayer-countdown" dir="ltr">
+        <span>--:--:--</span>
+    </div>
+</div>
+
+                <div class="prayer-grid">
+
+                    <article class="prayer-card">
+                        <span class="prayer-icon">🌙</span>
+                        <h3>الفجر</h3>
+                        <p>سيتم تحديد الموعد</p>
+                    </article>
+
+                    <article class="prayer-card">
+                        <span class="prayer-icon">☀️</span>
+                        <h3>الظهر</h3>
+                        <p>سيتم تحديد الموعد</p>
+                    </article>
+
+                    <article class="prayer-card">
+                        <span class="prayer-icon">🌤️</span>
+                        <h3>العصر</h3>
+                        <p>سيتم تحديد الموعد</p>
+                    </article>
+
+                    <article class="prayer-card">
+                        <span class="prayer-icon">🌇</span>
+                        <h3>المغرب</h3>
+                        <p>سيتم تحديد الموعد</p>
+                    </article>
+
+                    <article class="prayer-card">
+                        <span class="prayer-icon">🌃</span>
+                        <h3>العشاء</h3>
+                        <p>سيتم تحديد الموعد</p>
+                    </article>
+
+                </div>
+
+                <p class="prayer-note">
+                    سيتم ربط هذه المواعيد بمصدر موثوق لمواقيت الصلاة
+                    في مدينة الشروق في مرحلة لاحقة.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- عن المسجد -->
+        <section class="about-section" id="about">
+
+            <div class="container about-grid">
+
+                <div class="about-image">
+                    <img
+                        src="images/mosque.jpg"
+                        alt="مسجد الشيخ الطيب بمدينة الشروق"
+                    >
+
+                    <div class="image-caption">
+                        <span>🕌</span>
+                        <span>مسجد الشيخ الطيب</span>
+                    </div>
+                </div>
+
+                <div class="about-content">
+
+                    <span class="section-label">عن المسجد</span>
+
+                    <h2>بيت الله يجمعنا على الخير</h2>
+
+                    <p>
+                        أهلًا بكم في الموقع الإلكتروني لمسجد الشيخ الطيب
+                        بمدينة الشروق.
+                    </p>
+
+                    <p>
+                        نسعى من خلال هذا الموقع إلى تسهيل وصول المصلين
+                        إلى المعلومات المتعلقة بالمسجد، ومواعيد الصلاة،
+                        والدروس والأنشطة الدينية.
+                    </p>
+
+                    <a href="#activities" class="text-link">
+                        اكتشف أنشطة المسجد ←
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- الأنشطة -->
+        <section class="activities-section" id="activities">
+
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">في رحاب المسجد</span>
+                    <h2>أنشطة المسجد</h2>
+                    <p>مساحة للتعلُّم والعبادة والتواصل بين أهل المسجد.</p>
+                </div>
+
+                <div class="activities-grid">
+
+                    <article class="activity-card">
+    <div class="activity-icon">📖</div>
+
+    <h3>القرآن الكريم</h3>
+
+    <p>
+        مساحة للتعريف بحلقات القرآن الكريم
+        وأنشطة تعلُّم كتاب الله، حسب المتاح بالمسجد.
+    </p>
+
+    <a href="quran.html" class="quran-button">تصفّح القرآن الكريم</a>
+</article>
+
+                    <article class="activity-card">
+                        <div class="activity-icon">🎙️</div>
+                        <h3>الدروس والخطب</h3>
+                        <p>
+                            تابع إعلانات الدروس الدينية وخطب الجمعة
+                            ومواعيد الأنشطة العلمية.
+                        </p>
+                    </article>
+
+                    <article class="activity-card">
+                        <div class="activity-icon">📢</div>
+                        <h3>أخبار المسجد</h3>
+                        <p>
+                            تعرّف على الإعلانات والأنشطة والمناسبات
+                            التي تنظمها إدارة المسجد.
+                        </p>
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- التواصل -->
+        <section class="contact-section" id="contact">
+
+            <div class="container contact-content">
+
+                <span class="section-label">نسعد بتواصلكم</span>
+
+                <h2>مسجد الشيخ الطيب</h2>
+
+                <p>مدينة الشروق — جمهورية مصر العربية</p>
+
+                <a
+                    href="https://www.facebook.com/SheikhTayabMosque/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="primary-button"
+                >
+                    صفحة المسجد على فيسبوك
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- تذييل الموقع -->
+    <footer class="footer">
+
+        <div class="container footer-content">
+
+            <div>
+                <strong>مسجد الشيخ الطيب</strong>
+                <p>مدينة الشروق</p>
+            </div>
+
+            <p class="footer-note">
+                نسأل الله أن يتقبل منا ومنكم صالح الأعمال.
+            </p>
+
+            <p class="copyright">
+                جميع الحقوق محفوظة © <span id="current-year"></span>
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

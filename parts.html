@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="استمع إلى القرآن الكريم مرتباً بالأجزاء">
+    <title>أجزاء القرآن الكريم | مسجد الشيخ الطيب</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Droid+Arabic+Naskh:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        .quran-page {
+            max-width: 1100px;
+            margin: auto;
+            padding: 50px 20px;
+            text-align: center;
+        }
+        .quran-heading {
+            color: #245642;
+            font-size: clamp(28px, 4vw, 38px);
+            font-weight: 800;
+            margin-bottom: 10px;
+            font-family: "Droid Arabic Naskh", serif;
+        }
+        .quran-subheading {
+            color: #737d76;
+            font-size: 15px;
+            margin-bottom: 40px;
+        }
+        .parts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            text-align: right;
+        }
+        .part-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+            min-height: 82px;
+            padding: 14px 16px;
+            background: #fff;
+            border: 1px solid #e8dfca;
+            border-radius: 13px;
+            color: #245642;
+            text-decoration: none;
+            text-align: right;
+            font-family: "Droid Arabic Naskh", serif;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s;
+        }
+        .part-item:hover {
+            background: #f8f5ee;
+            border-color: #b99a5b;
+        }
+        .part-number-badge {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            background: #eaf1eb;
+            color: #245642;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 15px;
+            flex-shrink: 0;
+        }
+        .part-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .part-name {
+            display: block;
+            font-family: "Droid Arabic Naskh", serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- رأس الموقع -->
+<header class="header">
+    <div class="container nav-container">
+        <a href="index.html#home" class="logo">
+            <span class="logo-icon">۞</span>
+            <span class="logo-text">
+                <strong>مسجد الشيخ الطيب</strong>
+                <small>مدينة الشروق</small>
+            </span>
+        </a>
+
+        <nav class="navigation">
+            <a href="index.html#home">الرئيسية</a>
+            <a href="index.html#about">عن المسجد</a>
+            <a href="index.html#prayer">مواقيت الصلاة</a>
+            <a href="index.html#activities">الأنشطة</a>
+        </nav>
+
+        <a href="index.html#contact" class="contact-button">تواصل معنا</a>
+    </div>
+</header>
+
+<main>
+    <section class="quran-page">
+        <div class="quran-top-bar">
+            <button class="quran-back-button" onclick="window.location.href='quran.html'">← عودة للقراء</button>
+        </div>
+
+        <h1 class="quran-heading" id="reciterTitle">القرآن الكريم - الأجزاء</h1>
+        <p class="quran-subheading">اختر الجزء لعرض السور التابعة له</p>
+
+        <div class="parts-grid" id="partsGrid">
+            <!-- سيتم توليد الأجزاء ديناميكياً -->
+        </div>
+    </section>
+</main>
+
+<!-- تذييل الموقع -->
+<footer class="footer">
+    <div class="container footer-content">
+        <div>
+            <strong>مسجد الشيخ الطيب</strong>
+            <p>مدينة الشروق</p>
+        </div>
+        <p class="footer-note">نسأل الله أن يتقبل منا ومنكم صالح الأعمال.</p>
+        <p class="copyright">جميع الحقوق محفوظة © <span id="current-year"></span></p>
+    </div>
+</footer>
+
+<script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // قراءة القارئ من الرابط إن وجد
+    const urlParams = new URLSearchParams(window.location.search);
+    const reciter = urlParams.get('reciter') || '';
+
+    // تم الاقتصار على الشيخين المعتمدين والمستقرين 100%
+    const recitersNames = {
+        'ajmy': 'الشيخ أحمد العجمي',
+        'sudais': 'الشيخ عبد الرحمن السديس'
+    };
+
+    if (reciter && recitersNames[reciter]) {
+        document.getElementById('reciterTitle').textContent = `الأجزاء - ${recitersNames[reciter]}`;
+    }
+
+    const partNames = [
+        "الجزء الأول", "الجزء الثاني", "الجزء الثالث", "الجزء الرابع", "الجزء الخامس",
+        "الجزء السادس", "الجزء السابع", "الجزء الثامن", "الجزء التاسع", "الجزء العاشر",
+        "الجزء الحادي عشر", "الجزء الثاني عشر", "الجزء الثالث عشر", "الجزء الرابع عشر", "الجزء الخامس عشر",
+        "الجزء السادس عشر", "الجزء السابع عشر", "الجزء الثامن عشر", "الجزء التاسع عشر", "الجزء العشرون",
+        "الجزء الحادي والعشرون", "الجزء الثاني والعشرون", "الجزء الثالث والعشرون", "الجزء الرابع والعشرون", "الجزء الخامس والعشرون",
+        "الجزء السادس والعشرون", "الجزء السابع والعشرون", "الجزء الثامن والعشرون", "الجزء التاسع والعشرون", "الجزء الثلاثون"
+    ];
+
+    const grid = document.getElementById("partsGrid");
+
+    partNames.forEach((name, index) => {
+        const partNumber = index + 1;
+
+        const card = document.createElement("a");
+        // تمرير رقم الجزء مع رمز القارئ في الرابط
+        card.href = `surahs.html?part=${partNumber}${reciter ? '&reciter=' + reciter : ''}`;
+        card.className = "part-item";
+
+        const badge = document.createElement("div");
+        badge.className = "part-number-badge";
+        badge.textContent = partNumber;
+
+        const info = document.createElement("div");
+        info.className = "part-info";
+
+        const title = document.createElement("span");
+        title.className = "part-name";
+        title.textContent = name;
+
+        info.appendChild(title);
+        card.appendChild(badge);
+        card.appendChild(info);
+        grid.appendChild(card);
+    });
+</script>
+
+</body>
+</html>

@@ -1,631 +1,652 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="سور الجزء - مسجد الشيخ الطيب">
-    <title>سور الجزء | مسجد الشيخ الطيب</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="سور الجزء - مسجد الشيخ الطيب">
+<title>سور الجزء | مسجد الشيخ الطيب</title>
 
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Droid+Arabic+Naskh:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Droid+Arabic+Naskh:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <style>
-        .quran-page {
-            max-width: 1100px;
-            margin: auto;
-            padding: 50px 20px;
-            text-align: center;
-        }
-        .quran-heading {
-            color: #245642;
-            font-size: clamp(28px, 4vw, 38px);
-            font-weight: 800;
-            margin-bottom: 10px;
-            font-family: "Droid Arabic Naskh", serif;
-        }
-        .quran-subheading {
-            color: #737d76;
-            font-size: 15px;
-            margin-bottom: 25px;
-        }
-        
-        .audio-player-container {
-            position: sticky;
-            top: 90px;
-            z-index: 100;
-            background: #fff;
-            border: 2px solid #b99a5b;
-            border-radius: 16px;
-            padding: 15px 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-            display: none;
-        }
-        .now-playing-title {
-            color: #245642;
-            font-weight: bold;
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-        audio {
-            width: 100%;
-            outline: none;
-            margin-bottom: 12px;
-        }
+<style>
+.quran-page {
+max-width: 1100px;
+margin: auto;
+padding: 40px 15px;
+text-align: center;
+}
+.quran-heading {
+color: #245642;
+font-size: clamp(26px, 4vw, 38px);
+font-weight: 800;
+margin-bottom: 8px;
+font-family: "Droid Arabic Naskh", serif;
+}
+.quran-subheading {
+color: #737d76;
+font-size: 14px;
+margin-bottom: 20px;
+}
 
-        /* تنسيق أزرار التحكم الإضافية داخل مشغل الصوت */
-        .player-controls-row {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            border-top: 1px dashed #e8dfca;
-            padding-top: 12px;
-        }
-        .control-btn {
-            padding: 8px 18px;
-            font-size: 14px;
-            font-weight: bold;
-            border-radius: 8px;
-            border: 1px solid #b99a5b;
-            background: #f8f5ee;
-            color: #245642;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .control-btn:hover {
-            background: #f4efe6;
-        }
-        .control-btn.active-repeat {
-            background: #245642 !important;
-            color: #fff !important;
-            border-color: #245642;
-        }
+.audio-player-container {
+position: sticky;
+top: 80px;
+z-index: 100;
+background: #fff;
+border: 2px solid #b99a5b;
+border-radius: 14px;
+padding: 12px 15px;
+margin-bottom: 20px;
+box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+display: none;
+}
+.now-playing-title {
+color: #245642;
+font-weight: bold;
+font-size: 15px;
+margin-bottom: 8px;
+}
+audio {
+width: 100%;
+outline: none;
+margin-bottom: 10px;
+height: 40px;
+}
 
-        .mushaf-container {
-            display: none;
-            background: #fffdf9;
-            border: 4px double #b99a5b;
-            border-radius: 20px;
-            padding: 40px 35px;
-            margin-bottom: 35px;
-            box-shadow: 0 10px 30px rgba(185, 154, 91, 0.15), inset 0 0 20px rgba(185, 154, 91, 0.05);
-            text-align: justify;
-            text-justify: inter-word;
-            line-height: 3.2;
-            font-family: "Amiri", serif;
-            font-size: 25px;
-            color: #173f32;
-            max-height: 520px;
-            overflow-y: auto;
-            position: relative;
-        }
+.player-controls-row {
+display: flex;
+justify-content: center;
+gap: 10px;
+border-top: 1px dashed #e8dfca;
+padding-top: 10px;
+}
+.control-btn {
+padding: 7px 15px;
+font-size: 13px;
+font-weight: bold;
+border-radius: 8px;
+border: 1px solid #b99a5b;
+background: #f8f5ee;
+color: #245642;
+cursor: pointer;
+transition: all 0.2s;
+}
+.control-btn:hover {
+background: #f4efe6;
+}
+.control-btn.active-repeat {
+background: #245642 !important;
+color: #fff !important;
+border-color: #245642;
+}
 
-        .mushaf-container::before {
-            content: "۞";
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            color: #b99a5b;
-            font-size: 20px;
-            opacity: 0.6;
-        }
-        .mushaf-container::after {
-            content: "۞";
-            position: absolute;
-            top: 10px;
-            left: 15px;
-            color: #b99a5b;
-            font-size: 20px;
-            opacity: 0.6;
-        }
+/* تنسيق المصحف المحسن والمتجاوب مع الموبايل */
+.mushaf-container {
+display: none;
+background: #fffdf9;
+border: 3px double #b99a5b;
+border-radius: 16px;
+padding: 25px 18px;
+margin-bottom: 30px;
+box-shadow: 0 8px 25px rgba(185, 154, 91, 0.12), inset 0 0 15px rgba(185, 154, 91, 0.04);
+text-align: justify;
+text-justify: inter-word;
+line-height: 2.8;
+font-family: "Amiri", serif;
+font-size: clamp(21px, 4.5vw, 25px); /* حجم خط متجاوب يقل على الموبايل ويزبر على الشاشات الكبيرة */
+color: #173f32;
+max-height: 480px;
+overflow-y: auto;
+position: relative;
+-webkit-overflow-scrolling: touch;
+}
 
-        .mushaf-header {
-            text-align: center;
-            font-size: 30px;
-            color: #245642;
-            font-weight: bold;
-            margin-bottom: 20px;
-            border-bottom: 2px dashed #e8dfca;
-            padding-bottom: 12px;
-        }
-        .basmala {
-            text-align: center;
-            font-size: 28px;
-            color: #b99a5b;
-            margin-bottom: 25px;
-            display: block;
-            font-weight: bold;
-        }
-        
-        .ayah {
-            display: inline;
-            padding: 4px 8px;
-            margin: 0 3px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.15s ease-in-out;
-        }
-        .ayah:hover {
-            background-color: #f4efe6;
-        }
-        .ayah.active-ayah {
-            background-color: #f7e4b5 !important;
-            color: #173f32 !important;
-            font-weight: bold;
-            box-shadow: 0 2px 8px rgba(185, 154, 91, 0.4);
-        }
-        .aya-number {
-            color: #b99a5b;
-            font-size: 19px;
-            margin: 0 4px;
-            font-weight: bold;
-        }
+.mushaf-container::before {
+content: "۞";
+position: absolute;
+top: 8px;
+right: 12px;
+color: #b99a5b;
+font-size: 16px;
+opacity: 0.6;
+}
+.mushaf-container::after {
+content: "۞";
+position: absolute;
+top: 8px;
+left: 12px;
+color: #b99a5b;
+font-size: 16px;
+opacity: 0.6;
+}
 
-        .surahs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-            text-align: right;
-        }
-        .surah-item {
-            display: flex;
-            flex-direction: column;
-            padding: 18px 20px;
-            background: #fff;
-            border: 1px solid #e8dfca;
-            border-radius: 13px;
-            color: #245642;
-            text-decoration: none;
-            font-family: "Droid Arabic Naskh", serif;
-            transition: all 0.2s;
-        }
-        .surah-item:hover {
-            background: #f8f5ee;
-            border-color: #b99a5b;
-            transform: translateY(-2px);
-        }
-        .surah-top-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            margin-bottom: 12px;
-        }
-        .surah-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .surah-number-badge {
-            width: 42px;
-            height: 42px;
-            display: grid;
-            place-items: center;
-            background: #eaf1eb;
-            color: #245642;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 15px;
-            flex-shrink: 0;
-        }
-        .surah-name {
-            font-size: 18px;
-            font-weight: 700;
-        }
-        .surah-type {
-            font-size: 13px;
-            color: #737d76;
-            background: #f4efe6;
-            padding: 4px 10px;
-            border-radius: 6px;
-        }
-        
-        .card-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            border-top: 1px solid #f4efe6;
-            padding-top: 12px;
-        }
-        .actions-row {
-            display: flex;
-            gap: 8px;
-        }
-        .action-btn {
-            flex: 1;
-            padding: 8px 10px;
-            font-size: 12px;
-            font-weight: bold;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            transition: background 0.2s;
-            text-align: center;
-        }
-        .btn-normal {
-            background: #245642;
-            color: #fff;
-        }
-        .btn-normal:hover {
-            background: #173f32;
-        }
-        .btn-highlight {
-            background: #e6d0a4;
-            color: #245642;
-        }
-        .btn-highlight:hover {
-            background: #d8bf8d;
-        }
-        .btn-sequential {
-            background: #b99a5b;
-            color: #fff;
-            width: 100%;
-        }
-        .btn-sequential:hover {
-            background: #a2834b;
-        }
-    </style>
+.mushaf-header {
+text-align: center;
+font-size: clamp(22px, 4vw, 28px);
+color: #245642;
+font-weight: bold;
+margin-bottom: 15px;
+border-bottom: 2px dashed #e8dfca;
+padding-bottom: 10px;
+}
+.basmala {
+text-align: center;
+font-size: clamp(20px, 3.8vw, 26px);
+color: #b99a5b;
+margin-bottom: 20px;
+display: block;
+font-weight: bold;
+}
+
+.ayah {
+display: inline;
+padding: 3px 5px;
+margin: 0 2px;
+border-radius: 6px;
+cursor: pointer;
+transition: all 0.15s ease-in-out;
+line-height: inherit;
+}
+.ayah:hover {
+background-color: #f4efe6;
+}
+.ayah.active-ayah {
+background-color: #f7e4b5 !important;
+color: #173f32 !important;
+font-weight: bold;
+box-shadow: 0 2px 6px rgba(185, 154, 91, 0.4);
+}
+.aya-number {
+color: #b99a5b;
+font-size: 0.8em;
+margin: 0 3px;
+font-weight: bold;
+display: inline-block;
+}
+
+.surahs-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+gap: 15px;
+text-align: right;
+}
+.surah-item {
+display: flex;
+flex-direction: column;
+padding: 16px;
+background: #fff;
+border: 1px solid #e8dfca;
+border-radius: 12px;
+color: #245642;
+text-decoration: none;
+font-family: "Droid Arabic Naskh", serif;
+transition: all 0.2s;
+}
+.surah-item:hover {
+background: #f8f5ee;
+border-color: #b99a5b;
+transform: translateY(-2px);
+}
+.surah-top-row {
+display: flex;
+align-items: center;
+justify-content: space-between;
+width: 100%;
+margin-bottom: 10px;
+}
+.surah-info {
+display: flex;
+align-items: center;
+gap: 12px;
+}
+.surah-number-badge {
+width: 38px;
+height: 38px;
+display: grid;
+place-items: center;
+background: #eaf1eb;
+color: #245642;
+border-radius: 9px;
+font-weight: 700;
+font-size: 14px;
+flex-shrink: 0;
+}
+.surah-name {
+font-size: 17px;
+font-weight: 700;
+}
+.surah-type {
+font-size: 12px;
+color: #737d76;
+background: #f4efe6;
+padding: 3px 8px;
+border-radius: 6px;
+}
+
+.card-actions {
+display: flex;
+flex-direction: column;
+gap: 8px;
+border-top: 1px solid #f4efe6;
+padding-top: 10px;
+}
+.actions-row {
+display: flex;
+gap: 8px;
+}
+.action-btn {
+flex: 1;
+padding: 8px;
+font-size: 12px;
+font-weight: bold;
+border-radius: 8px;
+border: none;
+cursor: pointer;
+transition: background 0.2s;
+text-align: center;
+}
+.btn-normal {
+background: #245642;
+color: #fff;
+}
+.btn-normal:hover {
+background: #173f32;
+}
+.btn-highlight {
+background: #e6d0a4;
+color: #245642;
+}
+.btn-highlight:hover {
+background: #d8bf8d;
+}
+.btn-sequential {
+background: #b99a5b;
+color: #fff;
+width: 100%;
+}
+.btn-sequential:hover {
+background: #a2834b;
+}
+
+/* تعديلات إضافية للشاشات الصغيرة جداً (الموبايل) */
+@media (max-width: 480px) {
+.mushaf-container {
+padding: 18px 12px;
+line-height: 2.6;
+}
+.quran-page {
+padding: 25px 10px;
+}
+}
+</style>
 </head>
 <body>
 
 <header class="header">
-    <div class="container nav-container">
-        <a href="index.html#home" class="logo">
-            <span class="logo-icon">۞</span>
-            <span class="logo-text">
-                <strong>مسجد الشيخ الطيب</strong>
-                <small>مدينة الشروق</small>
-            </span>
-        </a>
+<div class="container nav-container">
+<a href="index.html#home" class="logo">
+<span class="logo-icon">۞</span>
+<span class="logo-text">
+<strong>مسجد الشيخ الطيب</strong>
+<small>مدينة الشروق</small>
+</span>
+</a>
 
-        <nav class="navigation">
-            <a href="index.html#home">الرئيسية</a>
-            <a href="index.html#about">عن المسجد</a>
-            <a href="index.html#prayer">مواقيت الصلاة</a>
-            <a href="index.html#activities">الأنشطة</a>
-        </nav>
+<nav class="navigation">
+<a href="index.html#home">الرئيسية</a>
+<a href="index.html#about">عن المسجد</a>
+<a href="index.html#prayer">مواقيت الصلاة</a>
+<a href="index.html#activities">الأنشطة</a>
+</nav>
 
-        <a href="index.html#contact" class="contact-button">تواصل معنا</a>
-    </div>
+<a href="index.html#contact" class="contact-button">تواصل معنا</a>
+</div>
 </header>
 
 <main>
-    <section class="quran-page">
-        <div class="quran-top-bar">
-            <button class="quran-back-button" id="backBtn">← العودة للأجزاء</button>
-        </div>
+<section class="quran-page">
+<div class="quran-top-bar">
+<button class="quran-back-button" id="backBtn">← العودة للأجزاء</button>
+</div>
 
-        <h1 class="quran-heading" id="partTitle">سور الجزء</h1>
-        <p class="quran-subheading" id="reciterSubheading">اختر طريقة الاستماع المناسبة</p>
+<h1 class="quran-heading" id="partTitle">سور الجزء</h1>
+<p class="quran-subheading" id="reciterSubheading">اختر طريقة الاستماع المناسبة</p>
 
-        <!-- مشغل الصوت مع زر تكرار الآية -->
-        <div class="audio-player-container" id="playerContainer">
-            <div class="now-playing-title" id="nowPlayingTitle">جارٍ تشغيل السورة...</div>
-            <audio id="mainAudioPlayer" controls></audio>
-            
-            <div class="player-controls-row">
-                <button class="control-btn" id="repeatAyahBtn" onclick="toggleRepeatAyah()">🔁 تكرار الآية: معطل</button>
-            </div>
-        </div>
+<div class="audio-player-container" id="playerContainer">
+<div class="now-playing-title" id="nowPlayingTitle">جارٍ تشغيل السورة...</div>
+<audio id="mainAudioPlayer" controls></audio>
 
-        <audio id="preloadAudioPlayer" style="display:none;" preload="auto"></audio>
+<div class="player-controls-row" id="playerControlsRow">
+<button class="control-btn" id="repeatAyahBtn" onclick="toggleRepeatAyah()">🔁 تكرار الآية: معطل</button>
+</div>
+</div>
 
-        <div class="mushaf-container" id="mushafContainer">
-            <div class="mushaf-header" id="mushafTitle">سورة</div>
-            <div class="basmala" id="basmalaText">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
-            <div id="ayasContent">اختر سورة لعرض الآيات...</div>
-        </div>
+<audio id="preloadAudioPlayer" style="display:none;" preload="auto"></audio>
 
-        <div class="surahs-grid" id="surahsGrid"></div>
-    </section>
+<div class="mushaf-container" id="mushafContainer">
+<div class="mushaf-header" id="mushafTitle">سورة</div>
+<div class="basmala" id="basmalaText">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+<div id="ayasContent">اختر سورة لعرض الآيات...</div>
+</div>
+
+<div class="surahs-grid" id="surahsGrid"></div>
+</section>
 </main>
 
 <footer class="footer">
-    <div class="container footer-content">
-        <div>
-            <strong>مسجد الشيخ الطيب</strong>
-            <p>مدينة الشروق</p>
-        </div>
-        <p class="footer-note">نسأل الله أن يتقبل منا ومنكم صالح الأعمال.</p>
-        <p class="copyright">جميع الحقوق محفوظة © <span id="current-year"></span></p>
-    </div>
+<div class="container footer-content">
+<div>
+<strong>مسجد الشيخ الطيب</strong>
+<p>مدينة الشروق</p>
+</div>
+<p class="footer-note">نسأل الله أن يتقبل منا ومنكم صالح الأعمال.</p>
+<p class="copyright">جميع الحقوق محفوظة © <span id="current-year"></span></p>
+</div>
 </footer>
 
 <script>
-    document.getElementById('current-year').textContent = new Date().getFullYear();
+document.getElementById('current-year').textContent = new Date().getFullYear();
 
-    const recitersServers = {
-        'ajmy': { name: 'الشيخ أحمد العجمي', server: 'https://server10.mp3quran.net/ajm/', edition: 'ar.ahmedajamy' },
-        'sudais': { name: 'الشيخ عبد الرحمن السديس', server: 'https://server11.mp3quran.net/sds/', edition: 'ar.abdurrahmaansudais' },
-        'minshawi': { name: 'الشيخ محمد صديق المنشاوي', server: 'https://server11.mp3quran.net/minsh/', edition: 'ar.minshawi' },
-        'husary': { name: 'الشيخ محمود خليل الحصري', server: 'https://server13.mp3quran.net/husr/', edition: 'ar.husary' }
-    };
+const recitersServers = {
+'ajmy': { name: 'الشيخ أحمد العجمي', server: 'https://server10.mp3quran.net/ajm/', edition: 'ar.ahmedajamy' },
+'sudais': { name: 'الشيخ عبد الرحمن السديس', server: 'https://server11.mp3quran.net/sds/', edition: 'ar.abdurrahmaansudais' },
+'minshawi': { name: 'الشيخ محمد صديق المنشاوي', server: 'https://server11.mp3quran.net/minsh/', edition: 'ar.minshawi' },
+'husary': { name: 'الشيخ محمود خليل الحصري', server: 'https://server13.mp3quran.net/husr/', edition: 'ar.husary' }
+};
 
-    const partsData = {
-        1: [{ name: "الفاتحة", num: 1, type: "مكية" }, { name: "البقرة", num: 2, type: "مدنية" }],
-        2: [{ name: "البقرة", num: 2, type: "مدنية" }],
-        3: [{ name: "البقرة", num: 2, type: "مدنية" }, { name: "آل عمران", num: 3, type: "مدنية" }],
-        4: [{ name: "آل عمران", num: 3, type: "مدنية" }, { name: "النساء", num: 4, type: "مدنية" }],
-        5: [{ name: "النساء", num: 4, type: "مدنية" }],
-        6: [{ name: "النساء", num: 4, type: "مدنية" }, { name: "المائدة", num: 5, type: "مدنية" }],
-        7: [{ name: "المائدة", num: 5, type: "مدنية" }, { name: "الأنعام", num: 6, type: "مكية" }],
-        8: [{ name: "الأنعام", num: 6, type: "مكية" }, { name: "الأعراف", num: 7, type: "مكية" }],
-        9: [{ name: "الأعراف", num: 7, type: "مكية" }, { name: "الأنفال", num: 8, type: "مدنية" }],
-        10: [{ name: "الأنفال", num: 8, type: "مدنية" }, { name: "التوبة", num: 9, type: "مدنية" }],
-        11: [{ name: "التوبة", num: 9, type: "مدنية" }, { name: "يونس", num: 10, type: "مكية" }, { name: "هود", num: 11, type: "مكية" }],
-        12: [{ name: "هود", num: 11, type: "مكية" }, { name: "يوسف", num: 12, type: "مكية" }],
-        13: [{ name: "يوسف", num: 12, type: "مكية" }, { name: "الرعد", num: 13, type: "مدنية" }, { name: "إبراهيم", num: 14, type: "مكية" }],
-        14: [{ name: "الحجر", num: 15, type: "مكية" }, { name: "النحل", num: 16, type: "مكية" }],
-        15: [{ name: "الإسراء", num: 17, type: "مكية" }, { name: "الكهف", num: 18, type: "مكية" }],
-        16: [{ name: "الكهف", num: 18, type: "مكية" }, { name: "مريم", num: 19, type: "مكية" }, { name: "طه", num: 20, type: "مكية" }],
-        17: [{ name: "الأنبياء", num: 21, type: "مكية" }, { name: "الحج", num: 22, type: "مدنية" }],
-        18: [{ name: "المؤمنون", num: 23, type: "مكية" }, { name: "النور", num: 24, type: "مدنية" }, { name: "الفرقان", num: 25, type: "مكية" }],
-        19: [{ name: "الفرقان", num: 25, type: "مكية" }, { name: "الشعراء", num: 26, type: "مكية" }, { name: "النمل", num: 27, type: "مكية" }],
-        20: [{ name: "النمل", num: 27, type: "مكية" }, { name: "القصص", num: 28, type: "مكية" }, { name: "العنكبوت", num: 29, type: "مكية" }],
-        21: [{ name: "العنكبوت", num: 29, type: "مكية" }, { name: "الروم", num: 30, type: "مكية" }, { name: "لقمان", num: 31, type: "مكية" }, { name: "السجدة", num: 32, type: "مكية" }, { name: "الأحزاب", num: 33, type: "مدنية" }],
-        22: [{ name: "الأحزاب", num: 33, type: "مدنية" }, { name: "سبأ", num: 34, type: "مكية" }, { name: "فاطر", num: 35, type: "مكية" }, { name: "يس", num: 36, type: "مكية" }],
-        23: [{ name: "يس", num: 36, type: "مكية" }, { name: "الصافات", num: 37, type: "مكية" }, { name: "ص", num: 38, type: "مكية" }, { name: "الزمر", num: 39, type: "مكية" }],
-        24: [{ name: "الزمر", num: 39, type: "مكية" }, { name: "غافر", num: 40, type: "مكية" }, { name: "فصلت", num: 41, type: "مكية" }],
-        25: [{ name: "فصلت", num: 41, type: "مكية" }, { name: "الشورى", num: 42, type: "مكية" }, { name: "الزخرف", num: 43, type: "مكية" }, { name: "الدخان", num: 44, type: "مكية" }, { name: "الجاثية", num: 45, type: "مكية" }],
-        26: [{ name: "الأحقاف", num: 46, type: "مكية" }, { name: "محمد", num: 47, type: "مدنية" }, { name: "الفتح", num: 48, type: "مدنية" }, { name: "الحجرات", num: 49, type: "مدنية" }, { name: "ق", num: 50, type: "مكية" }, { name: "الذاريات", num: 51, type: "مكية" }],
-        27: [{ name: "الذاريات", num: 51, type: "مكية" }, { name: "الطور", num: 52, type: "مكية" }, { name: "النجم", num: 53, type: "مكية" }, { name: "القمر", num: 54, type: "مكية" }, { name: "الرحمن", num: 55, type: "مدنية" }, { name: "الواقعة", num: 56, type: "مكية" }, { name: "الحديد", num: 57, type: "مدنية" }],
-        28: [{ name: "المجادلة", num: 58, type: "مدنية" }, { name: "الحشر", num: 59, type: "مدنية" }, { name: "الممتحنة", num: 60, type: "مدنية" }, { name: "الصف", num: 61, type: "مدنية" }, { name: "الجمعة", num: 62, type: "مدنية" }, { name: "المنافقون", num: 63, type: "مدنية" }, { name: "التغابن", num: 64, type: "مدنية" }, { name: "الطلاق", num: 65, type: "مدنية" }, { name: "التحريم", num: 66, type: "مدنية" }],
-        29: [{ name: "الملك", num: 67, type: "مكية" }, { name: "القلم", num: 68, type: "مكية" }, { name: "الحاقة", num: 69, type: "مكية" }, { name: "المعارج", num: 70, type: "مكية" }, { name: "نوح", num: 71, type: "مكية" }, { name: "الجن", num: 72, type: "مكية" }, { name: "المزمل", num: 73, type: "مكية" }, { name: "المدثر", num: 74, type: "مكية" }, { name: "القيامة", num: 75, type: "مكية" }, { name: "الإنسان", num: 76, type: "مدنية" }, { name: "المرسلات", num: 77, type: "مكية" }],
-        30: [
-            { name: "النبأ", num: 78, type: "مكية" }, { name: "النازعات", num: 79, type: "مكية" }, { name: "عبس", num: 80, type: "مكية" }, { name: "التكوير", num: 81, type: "مكية" },
-            { name: "الانفطار", num: 82, type: "مكية" }, { name: "المطففين", num: 83, type: "مكية" }, { name: "الانشقاق", num: 84, type: "مكية" }, { name: "البروج", num: 85, type: "مكية" },
-            { name: "الطارق", num: 86, type: "مكية" }, { name: "الأعلى", num: 87, type: "مكية" }, { name: "الغاشية", num: 88, type: "مكية" }, { name: "الفجر", num: 89, type: "مكية" },
-            { name: "البلد", num: 90, type: "مكية" }, { name: "الشمس", num: 91, type: "مكية" }, { name: "الليل", num: 92, type: "مكية" }, { name: "الضحى", num: 93, type: "مكية" },
-            { name: "الشرح", num: 94, type: "مكية" }, { name: "التين", num: 95, type: "مكية" }, { name: "العلق", num: 96, type: "مكية" }, { name: "القدر", num: 97, type: "مكية" },
-            { name: "البينة", num: 98, type: "مدنية" }, { name: "الزلزلة", num: 99, type: "مدنية" }, { name: "العاديات", num: 100, type: "مكية" }, { name: "القارعة", num: 101, type: "مكية" },
-            { name: "التكاثر", num: 102, type: "مكية" }, { name: "العصر", num: 103, type: "مكية" }, { name: "الهمزة", num: 104, type: "مكية" }, { name: "الفيل", num: 105, type: "مكية" },
-            { name: "قريش", num: 106, type: "مكية" }, { name: "الماعون", num: 107, type: "مكية" }, { name: "الكوثر", num: 108, type: "مكية" }, { name: "الكافرون", num: 109, type: "مكية" },
-            { name: "النصر", num: 110, type: "مدنية" }, { name: "المسد", num: 111, type: "مكية" }, { name: "الإخلاص", num: 112, type: "مكية" }, { name: "الفلق", num: 113, type: "مكية" },
-            { name: "الناس", num: 114, type: "مكية" }
-        ]
-    };
+const partsData = {
+1: [{ name: "الفاتحة", num: 1, type: "مكية" }, { name: "البقرة", num: 2, type: "مدنية" }],
+2: [{ name: "البقرة", num: 2, type: "مدنية" }],
+3: [{ name: "البقرة", num: 2, type: "مدنية" }, { name: "آل عمران", num: 3, type: "مدنية" }],
+4: [{ name: "آل عمران", num: 3, type: "مدنية" }, { name: "النساء", num: 4, type: "مدنية" }],
+5: [{ name: "النساء", num: 4, type: "مدنية" }],
+6: [{ name: "النساء", num: 4, type: "مدنية" }, { name: "المائدة", num: 5, type: "مدنية" }],
+7: [{ name: "المائدة", num: 5, type: "مدنية" }, { name: "الأنعام", num: 6, type: "مكية" }],
+8: [{ name: "الأنعام", num: 6, type: "مكية" }, { name: "الأعراف", num: 7, type: "مكية" }],
+9: [{ name: "الأعراف", num: 7, type: "مكية" }, { name: "الأنفال", num: 8, type: "مدنية" }],
+10: [{ name: "الأنفال", num: 8, type: "مدنية" }, { name: "التوبة", num: 9, type: "مدنية" }],
+11: [{ name: "التوبة", num: 9, type: "مدنية" }, { name: "يونس", num: 10, type: "مكية" }, { name: "هود", num: 11, type: "مكية" }],
+12: [{ name: "هود", num: 11, type: "مكية" }, { name: "يوسف", num: 12, type: "مكية" }],
+13: [{ name: "يوسف", num: 12, type: "مكية" }, { name: "الرعد", num: 13, type: "مدنية" }, { name: "إبراهيم", num: 14, type: "مكية" }],
+14: [{ name: "الحجر", num: 15, type: "مكية" }, { name: "النحل", num: 16, type: "مكية" }],
+15: [{ name: "الإسراء", num: 17, type: "مكية" }, { name: "الكهف", num: 18, type: "مكية" }],
+16: [{ name: "الكهف", num: 18, type: "مكية" }, { name: "مريم", num: 19, type: "مكية" }, { name: "طه", num: 20, type: "مكية" }],
+17: [{ name: "الأنبياء", num: 21, type: "مكية" }, { name: "الحج", num: 22, type: "مدنية" }],
+18: [{ name: "المؤمنون", num: 23, type: "مكية" }, { name: "النور", num: 24, type: "مدنية" }, { name: "الفرقان", num: 25, type: "مكية" }],
+19: [{ name: "الفرقان", num: 25, type: "مكية" }, { name: "الشعراء", num: 26, type: "مكية" }, { name: "النمل", num: 27, type: "مكية" }],
+20: [{ name: "النمل", num: 27, type: "مكية" }, { name: "القصص", num: 28, type: "مكية" }, { name: "العنكبوت", num: 29, type: "مكية" }],
+21: [{ name: "العنكبوت", num: 29, type: "مكية" }, { name: "الروم", num: 30, type: "مكية" }, { name: "لقمان", num: 31, type: "مكية" }, { name: "السجدة", num: 32, type: "مكية" }, { name: "الأحزاب", num: 33, type: "مدنية" }],
+22: [{ name: "الأحزاب", num: 33, type: "مدنية" }, { name: "سبأ", num: 34, type: "مكية" }, { name: "فاطر", num: 35, type: "مكية" }, { name: "يس", num: 36, type: "مكية" }],
+23: [{ name: "يس", num: 36, type: "مكية" }, { name: "الصافات", num: 37, type: "مكية" }, { name: "ص", num: 38, type: "مكية" }, { name: "الزمر", num: 39, type: "مكية" }],
+24: [{ name: "الزمر", num: 39, type: "مكية" }, { name: "غافر", num: 40, type: "مكية" }, { name: "فصلت", num: 41, type: "مكية" }],
+25: [{ name: "فصلت", num: 41, type: "مكية" }, { name: "الشورى", num: 42, type: "مكية" }, { name: "الزخرف", num: 43, type: "مكية" }, { name: "الدخان", num: 44, type: "مكية" }, { name: "الجاثية", num: 45, type: "مكية" }],
+26: [{ name: "الأحقاف", num: 46, type: "مكية" }, { name: "محمد", num: 47, type: "مدنية" }, { name: "الفتح", num: 48, type: "مدنية" }, { name: "الحجرات", num: 49, type: "مدنية" }, { name: "ق", num: 50, type: "مكية" }, { name: "الذاريات", num: 51, type: "مكية" }],
+27: [{ name: "الذاريات", num: 51, type: "مكية" }, { name: "الطور", num: 52, type: "مكية" }, { name: "النجم", num: 53, type: "مكية" }, { name: "القمر", num: 54, type: "مكية" }, { name: "الرحمن", num: 55, type: "مدنية" }, { name: "الواقعة", num: 56, type: "مكية" }, { name: "الحديد", num: 57, type: "مدنية" }],
+28: [{ name: "المجادلة", num: 58, type: "مدنية" }, { name: "الحشر", num: 59, type: "مدنية" }, { name: "الممتحنة", num: 60, type: "مدنية" }, { name: "الصف", num: 61, type: "مدنية" }, { name: "الجمعة", num: 62, type: "مدنية" }, { name: "المنافقون", num: 63, type: "مدنية" }, { name: "التغابن", num: 64, type: "مدنية" }, { name: "الطلاق", num: 65, type: "مدنية" }, { name: "التحريم", num: 66, type: "مدنية" }],
+29: [{ name: "الملك", num: 67, type: "مكية" }, { name: "القلم", num: 68, type: "مكية" }, { name: "الحاقة", num: 69, type: "مكية" }, { name: "المعارج", num: 70, type: "مكية" }, { name: "نوح", num: 71, type: "مكية" }, { name: "الجن", num: 72, type: "مكية" }, { name: "المزمل", num: 73, type: "مكية" }, { name: "المدثر", num: 74, type: "مكية" }, { name: "القيامة", num: 75, type: "مكية" }, { name: "الإنسان", num: 76, type: "مدنية" }, { name: "المرسلات", num: 77, type: "مكية" }],
+30: [
+{ name: "النبأ", num: 78, type: "مكية" }, { name: "النازعات", num: 79, type: "مكية" }, { name: "عبس", num: 80, type: "مكية" }, { name: "التكوير", num: 81, type: "مكية" },
+{ name: "الانفطار", num: 82, type: "مكية" }, { name: "المطففين", num: 83, type: "مكية" }, { name: "الانشقاق", num: 84, type: "مكية" }, { name: "البروج", num: 85, type: "مكية" },
+{ name: "الطارق", num: 86, type: "مكية" }, { name: "الأعلى", num: 87, type: "مكية" }, { name: "الغاشية", num: 88, type: "مكية" }, { name: "الفجر", num: 89, type: "مكية" },
+{ name: "البلد", num: 90, type: "مكية" }, { name: "الشمس", num: 91, type: "مكية" }, { name: "الليل", num: 92, type: "مكية" }, { name: "الضحى", num: 93, type: "مكية" },
+{ name: "الشرح", num: 94, type: "مكية" }, { name: "التين", num: 95, type: "مكية" }, { name: "العلق", num: 96, type: "مكية" }, { name: "القدر", num: 97, type: "مكية" },
+{ name: "البينة", num: 98, type: "مدنية" }, { name: "الزلزلة", num: 99, type: "مدنية" }, { name: "العاديات", num: 100, type: "مكية" }, { name: "القارعة", num: 101, type: "مكية" },
+{ name: "التكاثر", num: 102, type: "مكية" }, { name: "العصر", num: 103, type: "مكية" }, { name: "الهمزة", num: 104, type: "مكية" }, { name: "الفيل", num: 105, type: "مكية" },
+{ name: "قريش", num: 106, type: "مكية" }, { name: "الماعون", num: 107, type: "مكية" }, { name: "الكوثر", num: 108, type: "مكية" }, { name: "الكافرون", num: 109, type: "مكية" },
+{ name: "النصر", num: 110, type: "مدنية" }, { name: "المسد", num: 111, type: "مكية" }, { name: "الإخلاص", num: 112, type: "مكية" }, { name: "الفلق", num: 113, type: "مكية" },
+{ name: "الناس", num: 114, type: "مكية" }
+]
+};
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const partNumber = parseInt(urlParams.get('part')) || 1;
-    const reciterKey = urlParams.get('reciter') || 'ajmy';
+const urlParams = new URLSearchParams(window.location.search);
+const partNumber = parseInt(urlParams.get('part')) || 1;
+const reciterKey = urlParams.get('reciter') || 'ajmy';
 
-    const activeReciter = recitersServers[reciterKey] || recitersServers['ajmy'];
+const activeReciter = recitersServers[reciterKey] || recitersServers['ajmy'];
 
-    document.getElementById('backBtn').onclick = () => {
-        window.location.href = `parts.html?reciter=${reciterKey}`;
-    };
+document.getElementById('backBtn').onclick = () => {
+window.location.href = `parts.html?reciter=${reciterKey}`;
+};
 
-    const partNamesAr = [
-        "الأول", "الثاني", "الثالث", "الرابع", "الخامس", "السادس", "السابع", "الثامن", "التاسع", "العاشر",
-        "الحادي عشر", "الثاني عشر", "الثالث عشر", "الرابع عشر", "الخامس عشر", "السادس عشر", "السابع عشر", "الثامن عشر", "التاسع عشر", "العشرين",
-        "الحادي والعشرين", "الثاني والعشرين", "الثالث والعشرين", "الرابع والعشرين", "الخامس والعشرين", "السادس والعشرين", "السابع والعشرين", "الثامن والعشرين", "التاسع والعشرين", "الثلاثين"
-    ];
+const partNamesAr = [
+"الأول", "الثاني", "الثالث", "الرابع", "الخامس", "السادس", "السابع", "الثامن", "التاسع", "العاشر",
+"الحادي عشر", "الثاني عشر", "الثالث عشر", "الرابع عشر", "الخامس عشر", "السادس عشر", "السابع عشر", "الثامن عشر", "التاسع عشر", "العشرين",
+"الحادي والعشرين", "الثاني والعشرين", "الثالث والعشرين", "الرابع والعشرين", "الخامس والعشرين", "السادس والعشرين", "السابع والعشرين", "الثامن والعشرين", "التاسع والعشرين", "الثلاثين"
+];
 
-    document.getElementById("partTitle").textContent = `سور الجزء ${partNamesAr[partNumber - 1] || partNumber}`;
-    document.getElementById("reciterSubheading").textContent = `تلاوة بصوت ${activeReciter.name}`;
+document.getElementById("partTitle").textContent = `سور الجزء ${partNamesAr[partNumber - 1] || partNumber}`;
+document.getElementById("reciterSubheading").textContent = `تلاوة بصوت ${activeReciter.name}`;
 
-    const surahsGrid = document.getElementById("surahsGrid");
-    const currentSurahs = partsData[partNumber] || [];
-    
-    const playerContainer = document.getElementById("playerContainer");
-    const mainAudioPlayer = document.getElementById("mainAudioPlayer");
-    const preloadAudioPlayer = document.getElementById("preloadAudioPlayer");
-    const nowPlayingTitle = document.getElementById("nowPlayingTitle");
-    const repeatAyahBtn = document.getElementById("repeatAyahBtn");
+const surahsGrid = document.getElementById("surahsGrid");
+const currentSurahs = partsData[partNumber] || [];
 
-    const mushafContainer = document.getElementById("mushafContainer");
-    const mushafTitle = document.getElementById("mushafTitle");
-    const basmalaText = document.getElementById("basmalaText");
-    const ayasContent = document.getElementById("ayasContent");
+const playerContainer = document.getElementById("playerContainer");
+const mainAudioPlayer = document.getElementById("mainAudioPlayer");
+const preloadAudioPlayer = document.getElementById("preloadAudioPlayer");
+const nowPlayingTitle = document.getElementById("nowPlayingTitle");
+const repeatAyahBtn = document.getElementById("repeatAyahBtn");
+const playerControlsRow = document.getElementById("playerControlsRow");
 
-    let currentAyahsData = [];
-    let currentAyahIndex = 0;
-    let isSequentialPlaying = false;
-    let isRepeatAyahActive = false; // متغير لتتبع حالة تكرار الآية
+const mushafContainer = document.getElementById("mushafContainer");
+const mushafTitle = document.getElementById("mushafTitle");
+const basmalaText = document.getElementById("basmalaText");
+const ayasContent = document.getElementById("ayasContent");
 
-    function formatSurahNumber(num) {
-        return String(num).padStart(3, '0');
-    }
+let currentAyahsData = [];
+let currentAyahIndex = 0;
+let isAyahModeActive = false;
+let isRepeatAyahActive = false; 
+let ayahPlayCount = 0; 
 
-    function scrollToMushaf() {
-        mushafContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+function formatSurahNumber(num) {
+return String(num).padStart(3, '0');
+}
 
-    // دالة تفعيل/إلغاء تكرار الآية
-    function toggleRepeatAyah() {
-        isRepeatAyahActive = !isRepeatAyahActive;
-        if (isRepeatAyahActive) {
-            repeatAyahBtn.textContent = "🔁 تكرار الآية: مفعل";
-            repeatAyahBtn.classList.add('active-repeat');
-        } else {
-            repeatAyahBtn.textContent = "🔁 تكرار الآية: معطل";
-            repeatAyahBtn.classList.remove('active-repeat');
-        }
-    }
+function scrollToMushaf() {
+mushafContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
 
-    async function playNormalSurah(surahNum, surahName) {
-        isSequentialPlaying = false;
-        const surahFormattedNum = formatSurahNumber(surahNum);
-        const audioUrl = `${activeReciter.server}${surahFormattedNum}.mp3`;
+function toggleRepeatAyah() {
+isRepeatAyahActive = !isRepeatAyahActive;
+if (isRepeatAyahActive) {
+repeatAyahBtn.textContent = "🔁 تكرار الآية: مفعل";
+repeatAyahBtn.classList.add('active-repeat');
+if (isAyahModeActive && mainAudioPlayer.src) {
+ayahPlayCount = 1; 
+mainAudioPlayer.currentTime = 0;
+mainAudioPlayer.play();
+}
+} else {
+repeatAyahBtn.textContent = "🔁 تكرار الآية: معطل";
+repeatAyahBtn.classList.remove('active-repeat');
+}
+}
 
-        mainAudioPlayer.src = audioUrl;
-        nowPlayingTitle.textContent = `جارٍ تشغيل: سورة ${surahName} - ${activeReciter.name}`;
-        playerContainer.style.display = 'block';
-        mainAudioPlayer.play();
+async function playNormalSurah(surahNum, surahName) {
+isAyahModeActive = false;
+isRepeatAyahActive = false;
+repeatAyahBtn.textContent = "🔁 تكرار الآية: معطل";
+repeatAyahBtn.classList.remove('active-repeat');
+playerControlsRow.style.display = 'none';
 
-        scrollToMushaf();
+const surahFormattedNum = formatSurahNumber(surahNum);
+const audioUrl = `${activeReciter.server}${surahFormattedNum}.mp3`;
 
-        mushafContainer.style.display = 'block';
-        mushafTitle.textContent = `سورة ${surahName}`;
-        ayasContent.textContent = "جارٍ تحميل الآيات...";
+mainAudioPlayer.src = audioUrl;
+nowPlayingTitle.textContent = `جارٍ تشغيل: سورة ${surahName} - ${activeReciter.name}`;
+playerContainer.style.display = 'block';
+mainAudioPlayer.play();
 
-        if (surahNum === 9) basmalaText.style.display = 'none';
-        else basmalaText.style.display = 'block';
+scrollToMushaf();
 
-        try {
-            const response = await fetch(`https://api.alquran.cloud/v1/surah/${surahNum}/${activeReciter.edition}`);
-            const data = await response.json();
-            if (data.code === 200) {
-                currentAyahsData = data.data.ayahs;
-                let ayasHTML = "";
-                currentAyahsData.forEach((ayah, index) => {
-                    let text = ayah.text;
-                    if (surahNum !== 1 && surahNum !== 9 && ayah.numberInSurah === 1) {
-                        text = text.replace("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ", "").trim();
-                    }
-                    ayasHTML += `<span class="ayah" id="ayah-${index}" onclick="switchToAyahAndPlay(${index}, '${surahName}')">${text} <span class="aya-number">﴿${ayah.numberInSurah}﴾</span></span> `;
-                });
-                ayasContent.innerHTML = ayasHTML;
-            }
-        } catch (error) {
-            ayasContent.textContent = "تعذر تحميل نص الآيات.";
-        }
-    }
+mushafContainer.style.display = 'block';
+mushafTitle.textContent = `سورة ${surahName}`;
+ayasContent.textContent = "جارٍ تحميل الآيات...";
 
-    function switchToAyahAndPlay(index, surahName) {
-        isSequentialPlaying = true;
-        nowPlayingTitle.textContent = `تشغيل متسلسل: سورة ${surahName} - ${activeReciter.name}`;
-        playSpecificAyah(index, true);
-    }
+if (surahNum === 9) basmalaText.style.display = 'none';
+else basmalaText.style.display = 'block';
 
-    async function playAyahByAyahMode(surahNum, surahName) {
-        isSequentialPlaying = false;
-        mushafContainer.style.display = 'block';
-        mushafTitle.textContent = `سورة ${surahName} (اضغط على الآية لسماعها)`;
-        ayasContent.textContent = "جارٍ تجهيز الآيات والصوتيات...";
+try {
+const response = await fetch(`https://api.alquran.cloud/v1/surah/${surahNum}/quran-uthmani`);
+const data = await response.json();
+if (data.code === 200) {
+let ayasHTML = "";
+data.data.ayahs.forEach((ayah) => {
+let text = ayah.text;
+if (surahNum !== 1 && surahNum !== 9 && ayah.numberInSurah === 1) {
+text = text.replace("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ", "").trim();
+}
+ayasHTML += `<span class="ayah">${text} <span class="aya-number">﴿${ayah.numberInSurah}﴾</span></span> `;
+});
+ayasContent.innerHTML = ayasHTML;
+}
+} catch (error) {
+ayasContent.textContent = "تعذر تحميل نص السورة.";
+}
+}
 
-        if (surahNum === 9) basmalaText.style.display = 'none';
-        else basmalaText.style.display = 'block';
+async function playAyahByAyahMode(surahNum, surahName) {
+isAyahModeActive = true;
+playerControlsRow.style.display = 'flex';
 
-        try {
-            const response = await fetch(`https://api.alquran.cloud/v1/surah/${surahNum}/${activeReciter.edition}`);
-            const data = await response.json();
+mushafContainer.style.display = 'block';
+mushafTitle.textContent = `سورة ${surahName} (اضغط على الآية لسماعها وتكرارها)`;
+ayasContent.textContent = "جارٍ تجهيز الآيات والصوتيات...";
 
-            if (data.code === 200) {
-                currentAyahsData = data.data.ayahs;
-                let ayasHTML = "";
+if (surahNum === 9) basmalaText.style.display = 'none';
+else basmalaText.style.display = 'block';
 
-                currentAyahsData.forEach((ayah, index) => {
-                    let text = ayah.text;
-                    if (surahNum !== 1 && surahNum !== 9 && ayah.numberInSurah === 1) {
-                        text = text.replace("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ", "").trim();
-                    }
-                    ayasHTML += `<span class="ayah" id="ayah-${index}" onclick="playSpecificAyah(${index}, false)">${text} <span class="aya-number">﴿${ayah.numberInSurah}﴾</span></span> `;
-                });
+try {
+const response = await fetch(`https://api.alquran.cloud/v1/surah/${surahNum}/${activeReciter.edition}`);
+const data = await response.json();
 
-                ayasContent.innerHTML = ayasHTML;
-                playerContainer.style.display = 'block';
-                nowPlayingTitle.textContent = `تحديد الآية: سورة ${surahName} - ${activeReciter.name}`;
-                scrollToMushaf();
-            }
-        } catch (error) {
-            ayasContent.textContent = "تعذر تحميل الصوتيات.";
-        }
-    }
+if (data.code === 200) {
+currentAyahsData = data.data.ayahs;
+let ayasHTML = "";
 
-    async function playSequentialMode(surahNum, surahName) {
-        mushafContainer.style.display = 'block';
-        mushafTitle.textContent = `سورة ${surahName} (تشغيل متسلسل مع المتابعة)`;
-        ayasContent.textContent = "جارٍ تحميل الآيات والصوتيات...";
+currentAyahsData.forEach((ayah, index) => {
+let text = ayah.text;
+if (surahNum !== 1 && surahNum !== 9 && ayah.numberInSurah === 1) {
+text = text.replace("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ", "").trim();
+}
+ayasHTML += `<span class="ayah" id="ayah-${index}" onclick="playSpecificAyah(${index})">${text} <span class="aya-number">﴿${ayah.numberInSurah}﴾</span></span> `;
+});
 
-        if (surahNum === 9) basmalaText.style.display = 'none';
-        else basmalaText.style.display = 'block';
+ayasContent.innerHTML = ayasHTML;
+playerContainer.style.display = 'block';
+nowPlayingTitle.textContent = `تحديد الآية: سورة ${surahName} - ${activeReciter.name}`;
+scrollToMushaf();
+}
+} catch (error) {
+ayasContent.textContent = "تعذر تحميل الصوتيات.";
+}
+}
 
-        try {
-            const response = await fetch(`https://api.alquran.cloud/v1/surah/${surahNum}/${activeReciter.edition}`);
-            const data = await response.json();
+async function playSequentialMode(surahNum, surahName) {
+isAyahModeActive = true;
+playerControlsRow.style.display = 'flex';
 
-            if (data.code === 200) {
-                currentAyahsData = data.data.ayahs;
-                let ayasHTML = "";
+mushafContainer.style.display = 'block';
+mushafTitle.textContent = `سورة ${surahName} (تشغيل متسلسل مع المتابعة)`;
+ayasContent.textContent = "جارٍ تحميل الآيات والصوتيات...";
 
-                currentAyahsData.forEach((ayah, index) => {
-                    let text = ayah.text;
-                    if (surahNum !== 1 && surahNum !== 9 && ayah.numberInSurah === 1) {
-                        text = text.replace("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ", "").trim();
-                    }
-                    ayasHTML += `<span class="ayah" id="ayah-${index}" onclick="playSpecificAyah(${index}, true)">${text} <span class="aya-number">﴿${ayah.numberInSurah}﴾</span></span> `;
-                });
+if (surahNum === 9) basmalaText.style.display = 'none';
+else basmalaText.style.display = 'block';
 
-                ayasContent.innerHTML = ayasHTML;
-                playerContainer.style.display = 'block';
-                nowPlayingTitle.textContent = `تشغيل متسلسل: سورة ${surahName} - ${activeReciter.name}`;
-                scrollToMushaf();
+try {
+const response = await fetch(`https://api.alquran.cloud/v1/surah/${surahNum}/${activeReciter.edition}`);
+const data = await response.json();
 
-                isSequentialPlaying = true;
-                playSpecificAyah(0, true);
-            }
-        } catch (error) {
-            ayasContent.textContent = "تعذر تحميل التشغيل المتسلسل.";
-        }
-    }
+if (data.code === 200) {
+currentAyahsData = data.data.ayahs;
+let ayasHTML = "";
 
-    function playSpecificAyah(index, isSequential) {
-        if (index >= currentAyahsData.length) return;
+currentAyahsData.forEach((ayah, index) => {
+let text = ayah.text;
+if (surahNum !== 1 && surahNum !== 9 && ayah.numberInSurah === 1) {
+text = text.replace("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ", "").trim();
+}
+ayasHTML += `<span class="ayah" id="ayah-${index}" onclick="playSpecificAyah(${index})">${text} <span class="aya-number">﴿${ayah.numberInSurah}﴾</span></span> `;
+});
 
-        currentAyahIndex = index;
-        if (isSequential) {
-            isSequentialPlaying = true;
-        }
+ayasContent.innerHTML = ayasHTML;
+playerContainer.style.display = 'block';
+nowPlayingTitle.textContent = `تشغيل متسلسل: سورة ${surahName} - ${activeReciter.name}`;
+scrollToMushaf();
 
-        const ayah = currentAyahsData[index];
-        mainAudioPlayer.src = ayah.audio;
-        mainAudioPlayer.play();
+playSpecificAyah(0);
+}
+} catch (error) {
+ayasContent.textContent = "تعذر تحميل التشغيل المتسلسل.";
+}
+}
 
-        if (index + 1 < currentAyahsData.length) {
-            preloadAudioPlayer.src = currentAyahsData[index + 1].audio;
-        }
+function playSpecificAyah(index) {
+if (index >= currentAyahsData.length) return;
 
-        document.querySelectorAll('.ayah').forEach((el, i) => {
-            if (i === index) {
-                el.classList.add('active-ayah');
-                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            } else {
-                el.classList.remove('active-ayah');
-            }
-        });
-    }
+currentAyahIndex = index;
+ayahPlayCount = 1; 
 
-    // منطق انتهاء الآية: إذا كان التكرار مفعلاً سيعيد تشغيل نفس الآية، وإلا سينتقل للآية التالية
-    mainAudioPlayer.onended = () => {
-        if (isRepeatAyahActive) {
-            mainAudioPlayer.currentTime = 0;
-            mainAudioPlayer.play();
-        } else if (isSequentialPlaying) {
-            if (currentAyahIndex + 1 < currentAyahsData.length) {
-                playSpecificAyah(currentAyahIndex + 1, true);
-            } else {
-                isSequentialPlaying = false;
-            }
-        }
-    };
+const ayah = currentAyahsData[index];
+mainAudioPlayer.src = ayah.audio;
+mainAudioPlayer.play();
 
-    currentSurahs.forEach(surah => {
-        const item = document.createElement("div");
-        item.className = "surah-item";
+if (index + 1 < currentAyahsData.length) {
+preloadAudioPlayer.src = currentAyahsData[index + 1].audio;
+}
 
-        item.innerHTML = `
-            <div class="surah-top-row">
-                <div class="surah-info">
-                    <div class="surah-number-badge">${surah.num}</div>
-                    <span class="surah-name">سورة ${surah.name}</span>
-                </div>
-                <span class="surah-type">${surah.type}</span>
-            </div>
-            <div class="card-actions">
-                <div class="actions-row">
-                    <button class="action-btn btn-normal" onclick="playNormalSurah(${surah.num}, '${surah.name}')">▶ استماع عادي</button>
-                    <button class="action-btn btn-highlight" onclick="playAyahByAyahMode(${surah.num}, '${surah.name}')">🔍 تحديد الآية</button>
-                </div>
-                <button class="action-btn btn-sequential" onclick="playSequentialMode(${surah.num}, '${surah.name}')">✨ تشغيل متسلسل مع الـ Highlight</button>
-            </div>
-        `;
+document.querySelectorAll('.ayah').forEach((el, i) => {
+if (i === index) {
+el.classList.add('active-ayah');
+el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+} else {
+el.classList.remove('active-ayah');
+}
+});
+}
 
-        surahsGrid.appendChild(item);
-    });
+mainAudioPlayer.onended = () => {
+if (isAyahModeActive) {
+if (isRepeatAyahActive && ayahPlayCount < 2) {
+ayahPlayCount++;
+mainAudioPlayer.currentTime = 0;
+mainAudioPlayer.play();
+} else {
+ayahPlayCount = 1; 
+if (currentAyahIndex + 1 < currentAyahsData.length) {
+playSpecificAyah(currentAyahIndex + 1);
+}
+}
+}
+};
+
+currentSurahs.forEach(surah => {
+const item = document.createElement("div");
+item.className = "surah-item";
+
+item.innerHTML = `
+<div class="surah-top-row">
+<div class="surah-info">
+<div class="surah-number-badge">${surah.num}</div>
+<span class="surah-name">سورة ${surah.name}</span>
+</div>
+<span class="surah-type">${surah.type}</span>
+</div>
+<div class="card-actions">
+<div class="actions-row">
+<button class="action-btn btn-normal" onclick="playNormalSurah(${surah.num}, '${surah.name}')">▶ استماع عادي</button>
+<button class="action-btn btn-highlight" onclick="playAyahByAyahMode(${surah.num}, '${surah.name}')">🔍 تحديد الآية</button>
+</div>
+<button class="action-btn btn-sequential" onclick="playSequentialMode(${surah.num}, '${surah.name}')">✨ تشغيل متسلسل مع الـ Highlight</button>
+</div>
+`;
+
+surahsGrid.appendChild(item);
+});
 </script>
 
 </body>

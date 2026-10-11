@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="لوحة تحكم الشيخ - مسجد الشيخ الطيب">
+    <title>لوحة التحكم | مسجد الشيخ الطيب</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        .dashboard-page {
+            max-width: 900px;
+            margin: auto;
+            padding: 40px 20px;
+            text-align: right;
+            font-family: "Cairo", sans-serif;
+        }
+        .dashboard-heading {
+            color: #245642;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        .dashboard-subheading {
+            color: #737d76;
+            font-size: 14px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .form-card {
+            background: #fff;
+            border: 1px solid #e8dfca;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+            margin-bottom: 30px;
+        }
+        .form-card h3 {
+            color: #245642;
+            margin-bottom: 15px;
+            font-size: 20px;
+            border-bottom: 2px dashed #e8dfca;
+            padding-bottom: 8px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-label {
+            display: block;
+            margin-bottom: 6px;
+            color: #245642;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #e8dfca;
+            border-radius: 8px;
+            font-family: "Cairo", sans-serif;
+            font-size: 14px;
+            outline: none;
+            background: #fffdf9;
+        }
+        .form-textarea {
+            resize: vertical;
+            height: 90px;
+        }
+        .submit-btn {
+            background: #245642;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+        .submit-btn:hover {
+            background: #173f32;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #245642;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .media-preview {
+            margin-top: 8px;
+            max-width: 120px;
+            max-height: 120px;
+            border-radius: 8px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="container nav-container">
+        <a href="index.html#home" class="logo">
+            <span class="logo-icon">۞</span>
+            <span class="logo-text">
+                <strong>مسجد الشيخ الطيب</strong>
+                <small>مدينة الشروق</small>
+            </span>
+        </a>
+
+        <nav class="navigation">
+            <a href="index.html#home">الرئيسية</a>
+            <a href="lessons.html">الدروس والخطب</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="dashboard-page">
+        <a href="index.html" class="back-link">← العودة للرئيسية</a>
+        
+        <h1 class="dashboard-heading">لوحة تحكم الشيخ الخاصة 🔒</h1>
+        <p class="dashboard-subheading">إدارة الدروس، الأخبار، ومتابعة الأسئلة الواردة والرد عليها</p>
+
+        <!-- أسئلة الفتاوى الواردة -->
+        <div class="form-card">
+            <h3>📩 أسئلة الفتاوى الواردة من المصلين والرد عليها</h3>
+            <div id="questionsContainer">
+                <!-- سيتم عرض الأسئلة هنا -->
+            </div>
+        </div>
+
+        <!-- إضافة درس أو خطبة -->
+        <div class="form-card">
+            <h3>📚 إضافة درس أو خطبة جديدة</h3>
+            <form id="lessonForm">
+                <div class="form-group">
+                    <label class="form-label">العنوان:</label>
+                    <input type="text" id="lessonTitle" class="form-input" placeholder="عنوان الدرس أو الخطبة" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">المحاضر:</label>
+                    <input type="text" id="lessonSpeaker" class="form-input" placeholder="اسم الشيخ أو المحاضر" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">اليوم والوقت:</label>
+                    <input type="text" id="lessonTime" class="form-input" placeholder="مثال: الجمعة بعد صلاة العشاء" required>
+                </div>
+                <button type="submit" class="submit-btn">➕ حفظ وإضافة الدرس</button>
+            </form>
+        </div>
+
+        <!-- إضافة خبر للمسجد -->
+        <div class="form-card">
+            <h3>📢 إضافة خبر أو نشاط جديد (نص، صورة، وفويس)</h3>
+            <form id="newsForm">
+                <div class="form-group">
+                    <label class="form-label">عنوان الخبر / النشاط:</label>
+                    <input type="text" id="newsTitle" class="form-input" placeholder="عنوان الخبر" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">التفاصيل والنص:</label>
+                    <textarea id="newsDesc" class="form-textarea" placeholder="تفاصيل الخبر..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">إرفاق صورة (اختياري):</label>
+                    <input type="file" id="newsImage" accept="image/*" class="form-input" onchange="previewImage(event)">
+                    <img id="imagePreview" class="media-preview">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">إرفاق تسجيل صوتي / Voice (اختياري):</label>
+                    <input type="file" id="newsAudio" accept="audio/*" class="form-input">
+                </div>
+                <button type="submit" class="submit-btn">📢 نشر الخبر في المسجد</button>
+            </form>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container footer-content">
+        <div>
+            <strong>مسجد الشيخ الطيب</strong>
+            <p>مدينة الشروق[cite: 2]</p>
+        </div>
+        <p class="copyright">جميع الحقوق محفوظة © <span id="current-year"></span>[cite: 2]</p>
+    </div>
+</footer>
+
+<script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    let pass = prompt("أدخل كلمة المرور الخاصة بالإدارة:");
+    if (pass !== "1234") {
+        alert("كلمة المرور غير صحيحة!");
+        window.location.href = "index.html";
+    }
+
+    function loadQuestions() {
+        let qList = JSON.parse(localStorage.getItem('sheikhQuestions')) || [];
+        let container = document.getElementById('questionsContainer');
+        if (qList.length === 0) {
+            container.innerHTML = "<p style='color:#777;'>لا توجد أسئلة جديدة حالياً.</p>";
+            return;
+        }
+        let html = "";
+        qList.forEach((q, index) => {
+            html += `
+                <div style="background: #f8f5ee; border: 1px solid #e8dfca; border-radius: 12px; padding: 15px; margin-bottom: 15px;">
+                    <div style="display: flex; justify-content: space-between; font-weight: bold; color: #245642; margin-bottom: 8px; font-size: 14px;">
+                        <span>👤 ${q.name} (${q.email})</span>
+                        <span>🕒 ${q.date}</span>
+                    </div>
+                    <div style="margin-bottom: 10px; color:#333; font-size:14px;">❓ <strong>السؤال:</strong> ${q.question}</div>
+                    <div class="form-group">
+                        <textarea id="answer-${index}" class="form-textarea" placeholder="اكتب رد الشيخ هنا..." style="height:60px;">${q.answer || ''}</textarea>
+                        <button onclick="saveAnswer(${index})" class="submit-btn" style="padding: 6px 12px; font-size: 13px; margin-top: 5px; width:auto;">حفظ وإرسال الرد ✍️</button>
+                    </div>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+    }
+
+    function saveAnswer(index) {
+        let qList = JSON.parse(localStorage.getItem('sheikhQuestions')) || [];
+        const answerText = document.getElementById(`answer-${index}`).value.trim();
+        qList[index].answer = answerText;
+        localStorage.setItem('sheikhQuestions', JSON.stringify(qList));
+        alert("تم حفظ رد الشيخ بنجاح!");
+        loadQuestions();
+    }
+
+    loadQuestions();
+
+    let base64Image = "";
+    function previewImage(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                base64Image = e.target.result;
+                const preview = document.getElementById('imagePreview');
+                preview.src = base64Image;
+                preview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    document.getElementById('lessonForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const title = document.getElementById('lessonTitle').value;
+        const speaker = document.getElementById('lessonSpeaker').value;
+        const timeInput = document.getElementById('lessonTime').value;
+
+        let lessons = JSON.parse(localStorage.getItem('sheikhLessons')) || [];
+        lessons.push({ title, speaker, day: timeInput, time: timeInput });
+        localStorage.setItem('sheikhLessons', JSON.stringify(lessons));
+
+        alert('تم حفظ الدرس بنجاح وعرضه في صفحة الدروس والخطب!');
+        document.getElementById('lessonForm').reset();
+    });
+
+    document.getElementById('newsForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const title = document.getElementById('newsTitle').value;
+        const desc = document.getElementById('newsDesc').value;
+
+        let newsList = JSON.parse(localStorage.getItem('sheikhNews')) || [];
+        newsList.push({ title, desc, image: base64Image, date: new Date().toLocaleDateString('ar-EG') });
+        localStorage.setItem('sheikhNews', JSON.stringify(newsList));
+
+        alert('تم نشر الخبر بنجاح!');
+        document.getElementById('newsForm').reset();
+        document.getElementById('imagePreview').style.display = 'none';
+        base64Image = "";
+    });
+</script>
+</body>
+</html>

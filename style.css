@@ -763,6 +763,7 @@ a:focus-visible {
         animation-duration: 0.01ms !important;
     }
 }
+
 /* العد التنازلي للصلاة القادمة */
 .countdown-box {
     max-width: 600px;
@@ -811,6 +812,7 @@ a:focus-visible {
         font-size: 22px;
     }
 }  
+
 .quran-button {
     display: inline-block;
     margin-top: 10px;
@@ -826,6 +828,7 @@ a:focus-visible {
 .quran-button:hover {
     background-color: #173f32;
 } 
+
 /* زر الرجوع في صفحات القرآن */
 .quran-top-bar {
     display: flex;
@@ -847,4 +850,19 @@ a:focus-visible {
 
 .quran-back-button:hover {
     background-color: #173f32;
+}   
+
+/* زر القفل المدمج في التذييل بجانب مدينة الشروق */
+.dashboard-lock-btn {
+    display: inline-block;
+    margin-right: 6px;
+    font-size: 13px;
+    text-decoration: none;
+    opacity: 0.6;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.dashboard-lock-btn:hover {
+    opacity: 1;
+    transform: scale(1.15);
 }

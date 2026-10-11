@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="مواعيد الدروس والخطب - مسجد الشيخ الطيب">
+    <title>الدروس والخطب | مسجد الشيخ الطيب</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Droid+Arabic+Naskh:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        .lessons-page {
+            max-width: 1100px;
+            margin: auto;
+            padding: 50px 20px;
+            text-align: center;
+        }
+        .lessons-heading {
+            color: #245642;
+            font-size: clamp(28px, 4vw, 38px);
+            font-weight: 800;
+            margin-bottom: 10px;
+            font-family: "Droid Arabic Naskh", serif;
+        }
+        .lessons-subheading {
+            color: #737d76;
+            font-size: 15px;
+            margin-bottom: 40px;
+        }
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            text-align: right;
+        }
+        .lesson-card {
+            background: #fff;
+            border: 1px solid #e8dfca;
+            border-radius: 13px;
+            padding: 20px;
+            color: #245642;
+            font-family: "Droid Arabic Naskh", serif;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .lesson-card:hover {
+            transform: translateY(-3px);
+            border-color: #b99a5b;
+        }
+        .lesson-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #245642;
+        }
+        .lesson-info {
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .lesson-time-badge {
+            display: inline-block;
+            background: #eaf1eb;
+            color: #245642;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .no-lessons {
+            grid-column: 1 / -1;
+            padding: 40px;
+            color: #737d76;
+            font-size: 18px;
+            background: #fff;
+            border-radius: 13px;
+            border: 1px dashed #e8dfca;
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="container nav-container">
+        <a href="index.html#home" class="logo">
+            <span class="logo-icon">۞</span>
+            <span class="logo-text">
+                <strong>مسجد الشيخ الطيب</strong>
+                <small>مدينة الشروق</small>
+            </span>
+        </a>
+
+        <nav class="navigation">
+            <a href="index.html#home">الرئيسية</a>
+            <a href="index.html#about">عن المسجد</a>
+            <a href="index.html#prayer">مواقيت الصلاة</a>
+            <a href="lessons.html" style="color: #b99a5b; font-weight: bold;">الدروس والخطب</a>
+            <a href="index.html#activities">الأنشطة</a>
+        </nav>
+
+        <a href="index.html#contact" class="contact-button">تواصل معنا</a>
+    </div>
+</header>
+
+<main>
+    <section class="lessons-page">
+        <h1 class="lessons-heading">مواعيد الدروس والخطب</h1>
+        <p class="lessons-subheading">تابع جدول الدروس الدينية والخطب الأسبوعية في مسجد الشيخ الطيب</p>
+
+        <div class="lessons-grid" id="lessonsGrid">
+            <!-- تحميل الدروس ديناميكياً -->
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container footer-content">
+        <div>
+            <strong>مسجد الشيخ الطيب</strong>
+            <p>مدينة الشروق</p>
+        </div>
+        <p class="footer-note">نسأل الله أن يتقبل منا ومنكم صالح الأعمال.</p>
+        <p class="copyright">جميع الحقوق محفوظة © <span id="current-year"></span></p>
+    </div>
+</footer>
+
+<script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    const defaultLessons = [
+        { title: "خطبة الجمعة: فضل الإحسان وأثره في المجتمع", speaker: "فضيلة الشيخ / إمام المسجد", day: "الجمعة", time: "بعد صلاة الجمعة مباشرة" },
+        { title: "درس تفسير سور المفصل", speaker: "فضيلة الشيخ", day: "الأحد", time: "بعد صلاة العشاء" },
+        { title: "شرح كتاب الأربعين النووية", speaker: "فضيلة الشيخ", day: "الثلاثاء", time: "بعد صلاة المغرب" }
+    ];
+
+    let savedLessons = JSON.parse(localStorage.getItem('sheikhLessons')) || defaultLessons;
+    const grid = document.getElementById('lessonsGrid');
+
+    if (savedLessons.length === 0) {
+        grid.innerHTML = `<div class="no-lessons">لا توجد مواعيد مضافة حالياً.</div>`;
+    } else {
+        savedLessons.forEach(lesson => {
+            const card = document.createElement('div');
+            card.className = 'lesson-card';
+            card.innerHTML = `
+                <div class="lesson-title">${lesson.title}</div>
+                <div class="lesson-info">👤 <strong>المحاضر:</strong> ${lesson.speaker}</div>
+                <div class="lesson-info">📅 <strong>اليوم:</strong> ${lesson.day}</div>
+                <div><span class="lesson-time-badge">⏰ ${lesson.time}</span></div>
+            `;
+            grid.appendChild(card);
+        });
+    }
+</script>
+
+</body>
+</html>

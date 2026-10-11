@@ -3,24 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <meta name="description" content="الموقع الإلكتروني لمسجد الشيخ الطيب بمدينة الشروق">
-
     <title>مسجد الشيخ الطيب | مدينة الشروق</title>
 
     <link rel="stylesheet" href="style.css">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        .fatwa-float-btn {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            background: linear-gradient(135deg, #173f32, #245642);
+            color: #fff;
+            border: 2px solid #b99a5b;
+            border-radius: 50px;
+            padding: 12px 22px;
+            font-size: 14px;
+            font-weight: 800;
+            box-shadow: 0 8px 25px rgba(23, 63, 50, 0.3);
+            cursor: pointer;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        .fatwa-float-btn:hover {
+            transform: translateY(-4px) scale(1.03);
+            background: #b99a5b;
+            color: #173f32;
+        }
+        .fatwa-icon-circle {
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-size: 16px;
+        }
+        .fatwa-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            z-index: 10000;
+            place-items: center;
+            padding: 20px;
+        }
+        .fatwa-modal-content {
+            background: #fff;
+            padding: 30px 25px;
+            border-radius: 20px;
+            max-width: 450px;
+            width: 100%;
+            border: 2px solid #b99a5b;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            text-align: right;
+        }
+        .fatwa-modal-content h3 {
+            color: #173f32;
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+        .fatwa-modal-content p {
+            color: #737d76;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+        .modal-step {
+            display: none;
+        }
+        .modal-step.active {
+            display: block;
+        }
+        .fatwa-input, .fatwa-textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e8dfca;
+            border-radius: 10px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 14px;
+            margin-bottom: 15px;
+            outline: none;
+        }
+        .fatwa-next-btn {
+            background: #245642;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            font-size: 14px;
+        }
+        .close-modal-btn {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #999;
+        }
+    </style>
 </head>
 
 <body>
 
-    <!-- رأس الموقع -->
     <header class="header">
         <div class="container nav-container">
-
             <a href="#home" class="logo">
                 <span class="logo-icon">۞</span>
                 <span class="logo-text">
@@ -33,272 +132,328 @@
                 <a href="#home">الرئيسية</a>
                 <a href="#about">عن المسجد</a>
                 <a href="#prayer">مواقيت الصلاة</a>
+                <a href="lessons.html">الدروس والخطب</a>
                 <a href="#activities">الأنشطة</a>
             </nav>
 
             <a href="#contact" class="contact-button">تواصل معنا</a>
-
         </div>
     </header>
 
-
     <main>
-
-        <!-- الواجهة الرئيسية -->
         <section class="hero" id="home">
-
             <div class="hero-overlay"></div>
-
             <div class="container hero-content">
-
                 <span class="hero-label">أهلًا وسهلًا بكم</span>
-
-                <h1>
-                    مسجد الشيخ الطيب
-                    <span>مدينة الشروق</span>
-                </h1>
-
-                <p>
-                    بيت من بيوت الله، يجتمع فيه المسلمون على الصلاة
-                    والذكر وتعلُّم القرآن الكريم.
-                </p>
-
+                <h1>مسجد الشيخ الطيب <span>مدينة الشروق</span></h1>
+                <p>بيت من بيوت الله، يجتمع فيه المسلمون على الصلاة والذكر وتعلُّم القرآن الكريم[cite: 2].</p>
                 <div class="hero-buttons">
-                    <a href="#prayer" class="primary-button">
-                        مواقيت الصلاة
-                    </a>
-
-                    <a href="#about" class="secondary-button">
-                        تعرّف على المسجد
-                    </a>
+                    <a href="#prayer" class="primary-button">مواقيت الصلاة</a>
+                    <a href="#about" class="secondary-button">تعرّف على المسجد</a>
                 </div>
-
             </div>
-
             <div class="hero-decoration">۞</div>
-
         </section>
 
-
-        <!-- مواقيت الصلاة -->
         <section class="prayer-section" id="prayer">
-
             <div class="container">
-
                 <div class="section-heading">
                     <span class="section-label">الصلاة</span>
                     <h2>مواقيت الصلاة</h2>
-                    <p>حافظ على صلاتك واجعل يومك عامرًا بذكر الله.</p>
+                    <p>حافظ على صلاتك واجعل يومك عامرًا بذكر الله[cite: 2].</p>
                 </div>
 
-                <div class="prayer-date">
-    <span id="today-date">جارٍ تحميل التاريخ...</span>
-</div>
+                <div class="prayer-date"><span id="today-date">جارٍ تحميل التاريخ...</span></div>
 
-<!-- العد التنازلي للصلاة القادمة -->
-<div class="countdown-box">
-    <span class="countdown-label">🕌 الصلاة القادمة</span>
-
-    <h3 id="next-prayer-name">جارٍ تحديد الصلاة القادمة...</h3>
-
-    <p class="countdown-description">الوقت المتبقي على الأذان</p>
-
-    <div class="countdown-timer" id="prayer-countdown" dir="ltr">
-        <span>--:--:--</span>
-    </div>
-</div>
+                <div class="countdown-box">
+                    <span class="countdown-label">🕌 الصلاة القادمة</span>
+                    <h3 id="next-prayer-name">جارٍ تحديد الصلاة القادمة...</h3>
+                    <p class="countdown-description">الوقت المتبقي على الأذان</p>
+                    <div class="countdown-timer" id="prayer-countdown" dir="ltr"><span>--:--:--</span></div>
+                </div>
 
                 <div class="prayer-grid">
-
-                    <article class="prayer-card">
-                        <span class="prayer-icon">🌙</span>
-                        <h3>الفجر</h3>
-                        <p>سيتم تحديد الموعد</p>
-                    </article>
-
-                    <article class="prayer-card">
-                        <span class="prayer-icon">☀️</span>
-                        <h3>الظهر</h3>
-                        <p>سيتم تحديد الموعد</p>
-                    </article>
-
-                    <article class="prayer-card">
-                        <span class="prayer-icon">🌤️</span>
-                        <h3>العصر</h3>
-                        <p>سيتم تحديد الموعد</p>
-                    </article>
-
-                    <article class="prayer-card">
-                        <span class="prayer-icon">🌇</span>
-                        <h3>المغرب</h3>
-                        <p>سيتم تحديد الموعد</p>
-                    </article>
-
-                    <article class="prayer-card">
-                        <span class="prayer-icon">🌃</span>
-                        <h3>العشاء</h3>
-                        <p>سيتم تحديد الموعد</p>
-                    </article>
-
+                    <article class="prayer-card"><span class="prayer-icon">🌙</span><h3>الفجر</h3><p>سيتم تحديد الموعد</p></article>
+                    <article class="prayer-card"><span class="prayer-icon">☀️</span><h3>الظهر</h3><p>سيتم تحديد الموعد</p></article>
+                    <article class="prayer-card"><span class="prayer-icon">🌤️</span><h3>العصر</h3><p>سيتم تحديد الموعد</p></article>
+                    <article class="prayer-card"><span class="prayer-icon">🌇</span><h3>المغرب</h3><p>سيتم تحديد الموعد</p></article>
+                    <article class="prayer-card"><span class="prayer-icon">🌃</span><h3>العشاء</h3><p>سيتم تحديد الموعد</p></article>
                 </div>
-
-                <p class="prayer-note">
-                    سيتم ربط هذه المواعيد بمصدر موثوق لمواقيت الصلاة
-                    في مدينة الشروق في مرحلة لاحقة.
-                </p>
-
+                <p class="prayer-note">سيتم ربط هذه المواعيد بمصدر موثوق لمواقيت الصلاة في مدينة الشروق في مرحلة لاحقة[cite: 2].</p>
             </div>
-
         </section>
 
-
-        <!-- عن المسجد -->
         <section class="about-section" id="about">
-
             <div class="container about-grid">
-
                 <div class="about-image">
-                    <img
-                        src="images/mosque.jpg"
-                        alt="مسجد الشيخ الطيب بمدينة الشروق"
-                    >
-
-                    <div class="image-caption">
-                        <span>🕌</span>
-                        <span>مسجد الشيخ الطيب</span>
-                    </div>
+                    <img src="images/mosque.jpg" alt="مسجد الشيخ الطيب بمدينة الشروق">
+                    <div class="image-caption"><span>🕌</span><span>مسجد الشيخ الطيب</span></div>
                 </div>
-
                 <div class="about-content">
-
                     <span class="section-label">عن المسجد</span>
-
                     <h2>بيت الله يجمعنا على الخير</h2>
-
-                    <p>
-                        أهلًا بكم في الموقع الإلكتروني لمسجد الشيخ الطيب
-                        بمدينة الشروق.
-                    </p>
-
-                    <p>
-                        نسعى من خلال هذا الموقع إلى تسهيل وصول المصلين
-                        إلى المعلومات المتعلقة بالمسجد، ومواعيد الصلاة،
-                        والدروس والأنشطة الدينية.
-                    </p>
-
-                    <a href="#activities" class="text-link">
-                        اكتشف أنشطة المسجد ←
-                    </a>
-
+                    <p>أهلًا بكم في الموقع الإلكتروني لمسجد الشيخ الطيب بمدينة الشروق[cite: 2].</p>
+                    <p>نسعى من خلال هذا الموقع إلى تسهيل وصول المصلين إلى المعلومات المتعلقة بالمسجد، ومواعيد الصلاة، والدروس والأنشطة الدينية[cite: 2].</p>
+                    <a href="#activities" class="text-link">اكتشف أنشطة المسجد ←</a>
                 </div>
-
             </div>
-
         </section>
 
-
-        <!-- الأنشطة -->
         <section class="activities-section" id="activities">
-
             <div class="container">
-
                 <div class="section-heading">
                     <span class="section-label">في رحاب المسجد</span>
                     <h2>أنشطة المسجد</h2>
-                    <p>مساحة للتعلُّم والعبادة والتواصل بين أهل المسجد.</p>
+                    <p>مساحة للتعلُّم والعبادة والتواصل بين أهل المسجد[cite: 2].</p>
                 </div>
-
                 <div class="activities-grid">
-
                     <article class="activity-card">
-    <div class="activity-icon">📖</div>
-
-    <h3>القرآن الكريم</h3>
-
-    <p>
-        مساحة للتعريف بحلقات القرآن الكريم
-        وأنشطة تعلُّم كتاب الله، حسب المتاح بالمسجد.
-    </p>
-
-    <a href="quran.html" class="quran-button">تصفّح القرآن الكريم</a>
-</article>
-
+                        <div class="activity-icon">📖</div>
+                        <h3>القرآن الكريم</h3>
+                        <p>مساحة للتعريف بحلقات القرآن الكريم وأنشطة تعلُّم كتاب الله، حسب المتاح بالمسجد[cite: 2].</p>
+                        <a href="quran.html" class="quran-button">تصفّح القرآن الكريم</a>
+                    </article>
                     <article class="activity-card">
                         <div class="activity-icon">🎙️</div>
                         <h3>الدروس والخطب</h3>
-                        <p>
-                            تابع إعلانات الدروس الدينية وخطب الجمعة
-                            ومواعيد الأنشطة العلمية.
-                        </p>
+                        <p>تابع إعلانات الدروس الدينية وخطب الجمعة ومواعيد الأنشطة العلمية[cite: 2].</p>
+                        <a href="lessons.html" class="quran-button" style="margin-top: 15px; display: inline-block;">تصفّح الدروس والخطب</a>
                     </article>
-
                     <article class="activity-card">
                         <div class="activity-icon">📢</div>
                         <h3>أخبار المسجد</h3>
-                        <p>
-                            تعرّف على الإعلانات والأنشطة والمناسبات
-                            التي تنظمها إدارة المسجد.
-                        </p>
+                        <p>تعرّف على الإعلانات والأنشطة والمناسبات التي تنظمها إدارة المسجد[cite: 2].</p>
                     </article>
-
                 </div>
-
             </div>
-
         </section>
 
-
-        <!-- التواصل -->
         <section class="contact-section" id="contact">
-
             <div class="container contact-content">
-
                 <span class="section-label">نسعد بتواصلكم</span>
-
                 <h2>مسجد الشيخ الطيب</h2>
-
-                <p>مدينة الشروق — جمهورية مصر العربية</p>
-
-                <a
-                    href="https://www.facebook.com/SheikhTayabMosque/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="primary-button"
-                >
-                    صفحة المسجد على فيسبوك
-                </a>
-
+                <p>مدينة الشروق — جمهورية مصر العربية[cite: 2]</p>
+                <a href="https://www.facebook.com/SheikhTayabMosque/" target="_blank" rel="noopener noreferrer" class="primary-button">صفحة المسجد على فيسبوك</a>
             </div>
-
         </section>
-
     </main>
 
+    <!-- زر "اسأل الشيخ للفتوى" العائم -->
+    <button class="fatwa-float-btn" onclick="openFatwaModal()">
+        <span class="fatwa-icon-circle">❓</span>
+        <span>اسأل الشيخ للفتوى</span>
+    </button>
 
-    <!-- تذييل الموقع -->
-    <footer class="footer">
+    <!-- نافذة طلب الفتوى وتسجيل الدخول بالكود -->
+    <div class="fatwa-modal" id="fatwaModal">
+        <div class="fatwa-modal-content">
+            <button class="close-modal-btn" onclick="closeFatwaModal()">✕</button>
 
-        <div class="container footer-content">
-
-            <div>
-                <strong>مسجد الشيخ الطيب</strong>
-                <p>مدينة الشروق</p>
+            <!-- القائمة الرئيسية -->
+            <div class="modal-step active" id="stepChoice">
+                <h3>قسم الفتاوى والاستشارات 🕌</h3>
+                <p>اختر ما ترغب به:</p>
+                <button class="fatwa-next-btn" style="margin-bottom: 12px;" onclick="checkAuthAndAsk()">✍️ طرح سؤال جديد</button>
+                <button class="fatwa-next-btn" style="background: #b99a5b;" onclick="checkAuthAndHistory()">📂 متابعة أسئلتي السابقة</button>
             </div>
 
-            <p class="footer-note">
-                نسأل الله أن يتقبل منا ومنكم صالح الأعمال.
-            </p>
+            <!-- خطوة 1: إدخال الاسم وإيميل Gmail -->
+            <div class="modal-step" id="stepSignInEmail">
+                <h3>تسجيل الدخول (Gmail) 📧</h3>
+                <p>أدخل اسمك وبريد الـ Gmail لإرسال كود التحقق:</p>
+                <input type="text" id="authName" class="fatwa-input" placeholder="الاسم الكريم" required>
+                <input type="email" id="authEmail" class="fatwa-input" placeholder="example@gmail.com" required>
+                <button class="fatwa-next-btn" onclick="sendVerificationCode()">إرسال كود التحقق 📨</button>
+            </div>
 
-            <p class="copyright">
-                جميع الحقوق محفوظة © <span id="current-year"></span>
-            </p>
+            <!-- خطوة 2: إدخال كود التحقق -->
+            <div class="modal-step" id="stepVerifyCode">
+                <h3>التحقق من البريد الإلكتروني 🔐</h3>
+                <p id="codeSentMsg" style="color: #245642; font-weight: bold;"></p>
+                <input type="text" id="enteredCode" class="fatwa-input" placeholder="أدخل كود التحقق المكون من 4 أرقام" maxlength="4" required>
+                <button class="fatwa-next-btn" onclick="verifyCodeAndLogin()">تأكيد الكود والدخول ✓</button>
+            </div>
 
+            <!-- خطوة كتابة السؤال -->
+            <div class="modal-step" id="stepQuestionBox">
+                <h3>اكتب سؤالك أو فتواك ✍️</h3>
+                <p id="welcomeUserText" style="color: #245642; font-weight: bold; margin-bottom: 10px;"></p>
+                <textarea id="userQuestion" class="fatwa-textarea" rows="4" placeholder="اكتب سؤالك هنا بالتفصيل..." required></textarea>
+                <button class="fatwa-next-btn" onclick="submitFatwa()">إرسال السؤال للشيخ ✨</button>
+            </div>
+
+            <!-- خطوة عرض الأسئلة السابقة -->
+            <div class="modal-step" id="stepMyHistory">
+                <h3>سجل أسئلتي السابقة 📂</h3>
+                <div id="myHistoryContainer" style="max-height: 280px; overflow-y: auto; text-align: right; margin-top: 10px;"></div>
+            </div>
         </div>
+    </div>
 
+    <footer class="footer">
+        <div class="container footer-content">
+            <div>
+                <strong>مسجد الشيخ الطيب</strong>
+                <p>مدينة الشروق[cite: 2]</p>
+                <div style="margin-top: 4px;">
+                    <a href="#" onclick="openDashboard(event)" class="dashboard-lock-btn" title="لوحة التحكم الخاصة" style="font-size: 12px; color: rgba(255,255,255,0.6); text-decoration: none;">🔒 إدارة المسجد</a>
+                </div>
+            </div>
+            <p class="footer-note">نسأل الله أن يتقبل منا ومنكم صالح الأعمال[cite: 2].</p>
+            <p class="copyright">جميع الحقوق محفوظة © <span id="current-year"></span>[cite: 2]</p>
+        </div>
     </footer>
 
-
     <script src="script.js"></script>
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
 
+        function openDashboard(event) {
+            event.preventDefault();
+            const pass = prompt("أدخل كلمة المرور الخاصة بالإدارة:");
+            if (pass === "1234") {
+                window.location.href = "sheikh-dashboard.html";
+            } else if (pass !== null) {
+                alert("كلمة المرور غير صحيحة!");
+            }
+        }
+
+        function openFatwaModal() {
+            document.getElementById('fatwaModal').style.display = 'grid';
+            hideAllSteps();
+            document.getElementById('stepChoice').classList.add('active');
+        }
+        function closeFatwaModal() {
+            document.getElementById('fatwaModal').style.display = 'none';
+        }
+        function hideAllSteps() {
+            document.querySelectorAll('.modal-step').forEach(el => el.classList.remove('active'));
+        }
+
+        let tempUserData = {};
+        let generatedCode = "";
+
+        function getCurrentUser() {
+            return JSON.parse(localStorage.getItem('sheikhUserSession'));
+        }
+
+        function checkAuthAndAsk() {
+            const user = getCurrentUser();
+            if (!user) {
+                hideAllSteps();
+                document.getElementById('stepSignInEmail').dataset.action = "ask";
+                document.getElementById('stepSignInEmail').classList.add('active');
+            } else {
+                hideAllSteps();
+                document.getElementById('welcomeUserText').textContent = `مرحباً بك، ${user.name} (${user.email})`;
+                document.getElementById('stepQuestionBox').classList.add('active');
+            }
+        }
+
+        function checkAuthAndHistory() {
+            const user = getCurrentUser();
+            if (!user) {
+                hideAllSteps();
+                document.getElementById('stepSignInEmail').dataset.action = "history";
+                document.getElementById('stepSignInEmail').classList.add('active');
+            } else {
+                loadUserHistory(user.email);
+            }
+        }
+
+        // إرسال كود التحقق
+        function sendVerificationCode() {
+            const name = document.getElementById('authName').value.trim();
+            const email = document.getElementById('authEmail').value.trim();
+
+            if (!name || !email || !email.includes('@gmail.com')) {
+                alert("يرجى إدخال اسم صحيح وبريد Gmail مطابق!");
+                return;
+            }
+
+            // توليد كود عشوائي من 4 أرقام
+            generatedCode = Math.floor(1000 + Math.random() * 9000).toString();
+            tempUserData = { name, email };
+
+            // محاكاة إرسال الإيميل (تنبيه بالكود البرمجي الذي تم إرساله)
+            alert(`[محاكاة إرسال بريد إلكتروني لـ ${email}]\n\nكود التحقق الخاص بك هو: ${generatedCode}`);
+
+            document.getElementById('codeSentMsg').textContent = `تم إرسال كود التحقق إلى: ${email}`;
+            hideAllSteps();
+            document.getElementById('stepVerifyCode').classList.add('active');
+        }
+
+        // التحقق من الكود المدخل وتسجيل الدخول
+        function verifyCodeAndLogin() {
+            const entered = document.getElementById('enteredCode').value.trim();
+
+            if (entered !== generatedCode) {
+                alert("كود التحقق غير صحيح! حاول مرة أخرى.");
+                return;
+            }
+
+            // حفظ الجلسة رسمياً
+            localStorage.setItem('sheikhUserSession', JSON.stringify(tempUserData));
+            alert("تم التحقق وتسجيل الدخول بنجاح! 🎉");
+
+            const action = document.getElementById('stepSignInEmail').dataset.action;
+            if (action === "ask") {
+                hideAllSteps();
+                document.getElementById('welcomeUserText').textContent = `مرحباً بك، ${tempUserData.name} (${tempUserData.email})`;
+                document.getElementById('stepQuestionBox').classList.add('active');
+            } else {
+                loadUserHistory(tempUserData.email);
+            }
+        }
+
+        function loadUserHistory(email) {
+            hideAllSteps();
+            document.getElementById('stepMyHistory').classList.add('active');
+            const container = document.getElementById('myHistoryContainer');
+
+            let questionsList = JSON.parse(localStorage.getItem('sheikhQuestions')) || [];
+            let userQuestions = questionsList.filter(q => q.email === email);
+
+            if (userQuestions.length === 0) {
+                container.innerHTML = "<p style='color:#777; font-size:14px; text-align:center;'>لا توجد أسئلة مسجلة بحسابك حتى الآن.</p>";
+                return;
+            }
+
+            let html = "";
+            userQuestions.forEach(q => {
+                html += `
+                    <div style="background:#f8f5ee; border:1px solid #e8dfca; border-radius:10px; padding:12px; margin-bottom:12px; font-size:13px;">
+                        <div><strong>سؤالك:</strong> ${q.question}</div>
+                        <div style="margin-top:6px; color:${q.answer ? '#245642' : '#b99a5b'};">
+                            <strong>الرد:</strong> ${q.answer ? q.answer : 'قيد المراجعة من الشيخ...'}
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function submitFatwa() {
+            const user = getCurrentUser();
+            const question = document.getElementById('userQuestion').value.trim();
+
+            if (!question) { alert("يرجى كتابة السؤال"); return; }
+
+            let questionsList = JSON.parse(localStorage.getItem('sheikhQuestions')) || [];
+            questionsList.push({
+                id: Date.now(),
+                name: user.name,
+                email: user.email,
+                question,
+                answer: "",
+                date: new Date().toLocaleDateString('ar-EG')
+            });
+            localStorage.setItem('sheikhQuestions', JSON.stringify(questionsList));
+
+            alert("تم إرسال سؤالك لفضيلة الشيخ بنجاح!");
+            document.getElementById('userQuestion').value = '';
+            closeFatwaModal();
+        }
+    </script>
 </body>
 </html>

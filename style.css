@@ -93,38 +93,88 @@ img {
     transition: background-color 0.35s ease, border-color 0.35s ease;
 }
 
-/* Theme toggle button */
+/* ========================================
+   DESIGN: Custom Switch Theme Toggle
+======================================== */
+
 .theme-toggle {
-    display: grid;
-    place-items: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    background: var(--surface-2);
-    color: var(--gold);
+    position: relative;
+    width: 64px;
+    height: 34px;
+    border-radius: 50px;
+    border: none;
     cursor: pointer;
-    font-size: 18px;
+    padding: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 0.3s ease;
+    outline: none;
     flex-shrink: 0;
-    transition: background 0.25s, transform 0.2s, border-color 0.25s;
 }
 
-.theme-toggle:hover {
-    background: var(--green-light);
-    transform: scale(1.06);
+/* خلفية التوجل في الوضع الفاتح (أصفر) */
+:root:not([data-theme="dark"]) .theme-toggle {
+    background-color: #fbc02d;
 }
 
-.theme-toggle .icon-sun,
-.theme-toggle .icon-moon {
-    display: none;
+/* خلفية التوجل في الوضع الداكن (كحلي رمادي) */
+[data-theme="dark"] .theme-toggle {
+    background-color: #2b384a;
+}
+
+/* الأيقونات الثابتة خلف الدائرة */
+.toggle-track-icons {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px;
+    pointer-events: none;
+    font-size: 13px;
+}
+
+:root:not([data-theme="dark"]) .track-sun { opacity: 0; }
+:root:not([data-theme="dark"]) .track-moon { opacity: 0.8; color: #fff59d; }
+
+[data-theme="dark"] .track-sun { opacity: 0.6; color: #90a4ae; }
+[data-theme="dark"] .track-moon { opacity: 0; }
+
+/* الدائرة المتحركة (Thumb) */
+.toggle-thumb {
+    width: 28px;
+    height: 28px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2;
+}
+
+:root:not([data-theme="dark"]) .toggle-thumb {
+    transform: translateX(0);
+}
+
+[data-theme="dark"] .toggle-thumb {
+    transform: translateX(-30px);
+}
+
+.toggle-thumb .icon-sun,
+.toggle-thumb .icon-moon {
     line-height: 1;
+    display: none;
 }
 
-:root:not([data-theme="dark"]) .theme-toggle .icon-moon {
+:root:not([data-theme="dark"]) .toggle-thumb .icon-sun {
     display: block;
 }
 
-[data-theme="dark"] .theme-toggle .icon-sun {
+[data-theme="dark"] .toggle-thumb .icon-moon {
     display: block;
 }
 
@@ -934,6 +984,7 @@ a:focus-visible {
     opacity: 1;
     transform: scale(1.15);
 }
+
 /* ===== Developed by credit ===== */
 .dev-credit {
     text-align: center;
@@ -1074,7 +1125,7 @@ a:focus-visible {
     background-color: #0d281e;
 }
 
-/* Dark mode for Quran / Lessons page cards (inline styles use these classes) */
+/* Dark mode for Quran / Lessons page cards */
 [data-theme="dark"] .reciter-card,
 [data-theme="dark"] .lesson-card,
 [data-theme="dark"] .part-item,
@@ -1156,4 +1207,119 @@ a:focus-visible {
 [data-theme="dark"] .cassette-deck {
     background: linear-gradient(180deg, #0d1f18 0%, #060d0b 100%) !important;
     border-color: var(--gold) !important;
+}
+/* ========================================
+   Custom Switch Theme Toggle (محدث ومظبوط)
+======================================== */
+
+.theme-toggle {
+    position: relative;
+    width: 62px;
+    height: 32px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    padding: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 0.3s ease;
+    outline: none;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    direction: ltr;
+}
+
+/* خلفية الزر */
+:root:not([data-theme="dark"]) .theme-toggle {
+    background-color: #fbc02d;
+}
+
+[data-theme="dark"] .theme-toggle {
+    background-color: #243244;
+}
+
+/* الأيقونات في الخلفية */
+.toggle-track-icons {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px;
+    pointer-events: none;
+}
+
+.track-icon {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.track-icon svg {
+    width: 14px;
+    height: 14px;
+}
+
+:root:not([data-theme="dark"]) .track-sun { opacity: 0; }
+:root:not([data-theme="dark"]) .track-moon svg { fill: #fff59d; }
+
+[data-theme="dark"] .track-sun svg { fill: #90a4ae; }
+[data-theme="dark"] .track-moon { opacity: 0; }
+
+/* الدائرة المتحركة */
+.toggle-thumb {
+    width: 26px;
+    height: 26px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2;
+}
+
+:root:not([data-theme="dark"]) .toggle-thumb {
+    transform: translateX(0);
+}
+
+[data-theme="dark"] .toggle-thumb {
+    transform: translateX(30px);
+}
+
+.thumb-icon {
+    width: 15px;
+    height: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.thumb-icon svg {
+    width: 14px;
+    height: 14px;
+}
+
+:root:not([data-theme="dark"]) .thumb-icon svg {
+    fill: #f57f17;
+}
+
+[data-theme="dark"] .thumb-icon svg {
+    fill: #1e293b;
+}
+
+.thumb-sun, .thumb-moon {
+    display: none;
+}
+
+:root:not([data-theme="dark"]) .thumb-sun {
+    display: flex;
+}
+
+[data-theme="dark"] .thumb-moon {
+    display: flex;
 }

@@ -83,6 +83,9 @@
             margin-bottom: 0;
         }
     </style>
+    <script>
+        (function(){var t=localStorage.getItem('mosque-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');})();
+    </script>
 </head>
 <body>
 
@@ -104,6 +107,10 @@
             <a href="index.html#activities">الأنشطة</a>
         </nav>
 
+            <button type="button" class="theme-toggle" aria-label="التبديل بين الوضع الداكن والفاتح" title="وضع داكن">
+                <span class="icon-moon">🌙</span>
+                <span class="icon-sun">☀️</span>
+            </button>
         <a href="index.html#contact" class="contact-button">تواصل معنا</a>
     </div>
 </header>
@@ -133,6 +140,12 @@
         <p class="footer-note">نسأل الله أن يتقبل منا ومنكم صالح الأعمال.</p>
         <p class="copyright">جميع الحقوق محفوظة © <span id="current-year"></span></p>
     </div>
+    <p class="dev-credit">
+      Developed by
+      <a href="https://www.facebook.com/profile.php?id=61577953845492" target="_blank" rel="noopener noreferrer">Mohamed</a>
+      &amp;
+      <a href="https://www.facebook.com/ahmedmoshah" target="_blank" rel="noopener noreferrer">Ahmed</a>
+    </p>
 </footer>
 
 <script>
@@ -189,5 +202,6 @@
     });
 </script>
 
+    <script src="theme.js"></script>
 </body>
 </html>

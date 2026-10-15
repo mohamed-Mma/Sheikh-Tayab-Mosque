@@ -106,15 +106,22 @@
             }
         }
     </style>
+    <script>
+        (function(){var t=localStorage.getItem('mosque-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');})();
+    </script>
 </head>
 
 <body>
 
 <main class="quran-page">
 
-    <div class="quran-top-bar">
+    <div class="quran-top-bar" style="display:flex;justify-content:space-between;align-items:center;">
         <button class="quran-back-button" onclick="history.back()">
             → رجوع
+        </button>
+        <button type="button" class="theme-toggle" aria-label="التبديل بين الوضع الداكن والفاتح" title="وضع داكن">
+            <span class="icon-moon">🌙</span>
+            <span class="icon-sun">☀️</span>
         </button>
     </div>
 
@@ -171,5 +178,26 @@
 
 </main>
 
+<footer class="footer">
+    <div class="container footer-content">
+        <div>
+            <strong>مسجد الشيخ الطيب</strong>
+            <p>مدينة الشروق</p>
+        </div>
+        <p class="footer-note">نسأل الله أن يتقبل منا ومنكم صالح الأعمال.</p>
+        <p class="copyright">جميع الحقوق محفوظة © <span id="current-year"></span></p>
+    </div>
+    <p class="dev-credit">
+      Developed by
+      <a href="https://www.facebook.com/profile.php?id=61577953845492" target="_blank" rel="noopener noreferrer">Mohamed</a>
+      &amp;
+      <a href="https://www.facebook.com/ahmedmoshah" target="_blank" rel="noopener noreferrer">Ahmed</a>
+    </p>
+</footer>
+<script>
+  document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
+
+    <script src="theme.js"></script>
 </body>
 </html>

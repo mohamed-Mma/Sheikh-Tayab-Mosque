@@ -100,6 +100,9 @@
             display: none;
         }
     </style>
+    <script>
+        (function(){var t=localStorage.getItem('mosque-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');})();
+    </script>
 </head>
 <body>
 
@@ -117,7 +120,11 @@
             <a href="index.html#home">الرئيسية</a>
             <a href="lessons.html">الدروس والخطب</a>
         </nav>
-    </div>
+                <button type="button" class="theme-toggle" aria-label="التبديل بين الوضع الداكن والفاتح" title="وضع داكن">
+                <span class="icon-moon">🌙</span>
+                <span class="icon-sun">☀️</span>
+            </button>
+</div>
 </header>
 
 <main>
@@ -148,11 +155,17 @@
                     <input type="text" id="lessonSpeaker" class="form-input" placeholder="اسم الشيخ أو المحاضر" required>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">اليوم والوقت:</label>
-                    <input type="text" id="lessonTime" class="form-input" placeholder="مثال: الجمعة بعد صلاة العشاء" required>
+                    <label class="form-label">اليوم:</label>
+                    <input type="text" id="lessonDay" class="form-input" placeholder="مثال: الجمعة" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">الوقت:</label>
+                    <input type="text" id="lessonTime" class="form-input" placeholder="مثال: بعد صلاة العشاء" required>
                 </div>
                 <button type="submit" class="submit-btn">➕ حفظ وإضافة الدرس</button>
             </form>
+            <h3 style="margin-top:25px;">الدروس الحالية</h3>
+            <div id="lessonsList"></div>
         </div>
 
         <!-- إضافة خبر للمسجد -->
@@ -178,6 +191,8 @@
                 </div>
                 <button type="submit" class="submit-btn">📢 نشر الخبر في المسجد</button>
             </form>
+            <h3 style="margin-top:25px;">الأخبار المنشورة</h3>
+            <div id="newsList"></div>
         </div>
     </section>
 </main>
@@ -186,10 +201,16 @@
     <div class="container footer-content">
         <div>
             <strong>مسجد الشيخ الطيب</strong>
-            <p>مدينة الشروق[cite: 2]</p>
+            <p>مدينة الشروق</p>
         </div>
-        <p class="copyright">جميع الحقوق محفوظة © <span id="current-year"></span>[cite: 2]</p>
+        <p class="copyright">جميع الحقوق محفوظة © <span id="current-year"></span></p>
     </div>
+    <p class="dev-credit">
+      Developed by
+      <a href="https://www.facebook.com/profile.php?id=61577953845492" target="_blank" rel="noopener noreferrer">Mohamed</a>
+      &amp;
+      <a href="https://www.facebook.com/ahmedmoshah" target="_blank" rel="noopener noreferrer">Ahmed</a>
+    </p>
 </footer>
 
 <script>
@@ -253,34 +274,113 @@
         }
     }
 
+    function loadLessonsAdmin() {
+        const lessons = JSON.parse(localStorage.getItem('sheikhLessons')) || [];
+        const box = document.getElementById('lessonsList');
+        if (!lessons.length) {
+            box.innerHTML = "<p style='color:#777;font-size:14px;'>لا توجد دروس مضافة بعد.</p>";
+            return;
+        }
+        box.innerHTML = lessons.map((l, i) => `
+            <div style="background:var(--cream,#f8f5ee);border:1px solid var(--border,#e8dfca);border-radius:10px;padding:12px;margin-bottom:10px;display:flex;justify-content:space-between;gap:10px;align-items:flex-start;">
+                <div style="flex:1;min-width:0;">
+                    <strong style="color:var(--green-dark,#245642);">${l.title}</strong>
+                    <div style="font-size:13px;color:#666;margin-top:4px;">👤 ${l.speaker} · 📅 ${l.day} · ⏰ ${l.time}</div>
+                </div>
+                <button type="button" onclick="deleteLesson(${i})" style="background:#c0392b;color:#fff;border:none;border-radius:6px;padding:6px 10px;cursor:pointer;font-size:12px;flex-shrink:0;">حذف</button>
+            </div>
+        `).join('');
+    }
+
+    function deleteLesson(index) {
+        if (!confirm('حذف هذا الدرس؟')) return;
+        let lessons = JSON.parse(localStorage.getItem('sheikhLessons')) || [];
+        lessons.splice(index, 1);
+        localStorage.setItem('sheikhLessons', JSON.stringify(lessons));
+        loadLessonsAdmin();
+    }
+
+    function loadNewsAdmin() {
+        const news = JSON.parse(localStorage.getItem('sheikhNews')) || [];
+        const box = document.getElementById('newsList');
+        if (!news.length) {
+            box.innerHTML = "<p style='color:#777;font-size:14px;'>لا توجد أخبار منشورة بعد.</p>";
+            return;
+        }
+        box.innerHTML = news.map((n, i) => `
+            <div style="background:var(--cream,#f8f5ee);border:1px solid var(--border,#e8dfca);border-radius:10px;padding:12px;margin-bottom:10px;display:flex;justify-content:space-between;gap:10px;align-items:flex-start;">
+                <div style="flex:1;min-width:0;">
+                    <strong style="color:var(--green-dark,#245642);">${n.title}</strong>
+                    <div style="font-size:13px;color:#666;margin-top:4px;">📅 ${n.date || ''}</div>
+                    <div style="font-size:13px;color:#555;margin-top:4px;">${(n.desc || '').substring(0, 80)}${(n.desc || '').length > 80 ? '…' : ''}</div>
+                </div>
+                <button type="button" onclick="deleteNews(${i})" style="background:#c0392b;color:#fff;border:none;border-radius:6px;padding:6px 10px;cursor:pointer;font-size:12px;flex-shrink:0;">حذف</button>
+            </div>
+        `).join('');
+    }
+
+    function deleteNews(index) {
+        if (!confirm('حذف هذا الخبر؟')) return;
+        let news = JSON.parse(localStorage.getItem('sheikhNews')) || [];
+        news.splice(index, 1);
+        localStorage.setItem('sheikhNews', JSON.stringify(news));
+        loadNewsAdmin();
+    }
+
     document.getElementById('lessonForm').addEventListener('submit', function(e) {
         e.preventDefault();
-        const title = document.getElementById('lessonTitle').value;
-        const speaker = document.getElementById('lessonSpeaker').value;
-        const timeInput = document.getElementById('lessonTime').value;
+        const title = document.getElementById('lessonTitle').value.trim();
+        const speaker = document.getElementById('lessonSpeaker').value.trim();
+        const day = document.getElementById('lessonDay').value.trim();
+        const time = document.getElementById('lessonTime').value.trim();
 
         let lessons = JSON.parse(localStorage.getItem('sheikhLessons')) || [];
-        lessons.push({ title, speaker, day: timeInput, time: timeInput });
+        lessons.push({ title, speaker, day, time });
         localStorage.setItem('sheikhLessons', JSON.stringify(lessons));
 
         alert('تم حفظ الدرس بنجاح وعرضه في صفحة الدروس والخطب!');
         document.getElementById('lessonForm').reset();
+        loadLessonsAdmin();
+    });
+
+    let base64Audio = "";
+    document.getElementById('newsAudio').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(ev) { base64Audio = ev.target.result; };
+            reader.readAsDataURL(file);
+        } else {
+            base64Audio = "";
+        }
     });
 
     document.getElementById('newsForm').addEventListener('submit', function(e) {
         e.preventDefault();
-        const title = document.getElementById('newsTitle').value;
-        const desc = document.getElementById('newsDesc').value;
+        const title = document.getElementById('newsTitle').value.trim();
+        const desc = document.getElementById('newsDesc').value.trim();
 
         let newsList = JSON.parse(localStorage.getItem('sheikhNews')) || [];
-        newsList.push({ title, desc, image: base64Image, date: new Date().toLocaleDateString('ar-EG') });
+        newsList.unshift({
+            title,
+            desc,
+            image: base64Image || "",
+            audio: base64Audio || "",
+            date: new Date().toLocaleDateString('ar-EG')
+        });
         localStorage.setItem('sheikhNews', JSON.stringify(newsList));
 
-        alert('تم نشر الخبر بنجاح!');
+        alert('تم نشر الخبر بنجاح! سيظهر في صفحة أخبار المسجد.');
         document.getElementById('newsForm').reset();
         document.getElementById('imagePreview').style.display = 'none';
         base64Image = "";
+        base64Audio = "";
+        loadNewsAdmin();
     });
+
+    loadLessonsAdmin();
+    loadNewsAdmin();
 </script>
+    <script src="theme.js"></script>
 </body>
 </html>

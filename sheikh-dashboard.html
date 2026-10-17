@@ -260,16 +260,23 @@
         }
         let html = "";
         questionsCache.forEach((q, index) => {
+            const st = q.status || "received";
+            const statusLabel = st === "replied" || q.answer ? "تم الرد" : st === "reviewing" ? "قيد المراجعة" : "وصل السؤال";
+            const statusColor = st === "replied" || q.answer ? "#155724" : st === "reviewing" ? "#856404" : "#245642";
             html += `
                 <div style="background: #f8f5ee; border: 1px solid #e8dfca; border-radius: 12px; padding: 15px; margin-bottom: 15px;">
                     <div style="display: flex; justify-content: space-between; font-weight: bold; color: #245642; margin-bottom: 8px; font-size: 14px;">
-                        <span>👤 ${q.name} (${q.email})</span>
-                        <span>🕒 ${q.date}</span>
+                        <span>👤 ${q.name} · 📱 ${q.phone || "—"}</span>
+                        <span style="color:${statusColor};font-size:12px;">${statusLabel}</span>
                     </div>
+                    <div style="margin-bottom: 6px; color:#777; font-size:12px;">🕒 ${q.date}</div>
                     <div style="margin-bottom: 10px; color:#333; font-size:14px;">❓ <strong>السؤال:</strong> ${q.question}</div>
+                    <div style="display:flex;gap:8px;margin-bottom:8px;">
+                        <button type="button" onclick="setStatus(${index}, 'reviewing')" class="submit-btn" style="padding:5px 10px;font-size:12px;width:auto;background:#b99a5b;">مراجعة السؤال</button>
+                    </div>
                     <div class="form-group">
                         <textarea id="answer-${index}" class="form-textarea" placeholder="اكتب رد الشيخ هنا..." style="height:60px;">${q.answer || ''}</textarea>
-                        <button onclick="saveAnswer(${index})" class="submit-btn" style="padding: 6px 12px; font-size: 13px; margin-top: 5px; width:auto;">حفظ وإرسال الرد ✍️</button>
+                        <button onclick="saveAnswer(${index})" class="submit-btn" style="padding: 6px 12px; font-size: 13px; margin-top: 5px; width:auto;">حفظ الرد ✍️</button>
                     </div>
                 </div>
             `;
@@ -277,19 +284,36 @@
         container.innerHTML = html;
     }
 
+    async function setStatus(index, status) {
+        const q = questionsCache[index];
+        if (!q) return;
+        if (window.db && q.id) {
+            await window.db.collection("questions").doc(q.id).update({ status });
+        } else {
+            let qList = JSON.parse(localStorage.getItem('sheikhQuestions')) || [];
+            const match = qList.find(x => x.timestamp === q.timestamp && x.phone === q.phone);
+            if (match) match.status = status;
+            localStorage.setItem('sheikhQuestions', JSON.stringify(qList));
+        }
+        loadQuestions();
+    }
+
     async function saveAnswer(index) {
         const answerText = document.getElementById(`answer-${index}`).value.trim();
         const q = questionsCache[index];
         if (!q) return;
 
+        const update = { answer: answerText, status: answerText ? "replied" : (q.status || "received") };
+
         if (window.db && q.id) {
-            await window.db.collection("questions").doc(q.id).update({ answer: answerText });
+            await window.db.collection("questions").doc(q.id).update(update);
         } else {
             let qList = JSON.parse(localStorage.getItem('sheikhQuestions')) || [];
-            if (qList[index]) qList[index].answer = answerText;
+            const match = qList.find(x => x.timestamp === q.timestamp && x.phone === q.phone);
+            if (match) { match.answer = answerText; match.status = update.status; }
             localStorage.setItem('sheikhQuestions', JSON.stringify(qList));
         }
-        alert("تم حفظ رد الشيخ بنجاح!");
+        alert("تم حفظ الرد!");
         loadQuestions();
     }
 

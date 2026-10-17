@@ -156,9 +156,52 @@
   background: #173f32;
 }
 
-.ask-sheikh-success {
+.ask-sheikh-link {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  background: transparent;
+  border: none;
+  color: #245642;
+  font-size: 13px;
+  cursor: pointer;
   text-align: center;
-  padding: 20px 10px;
+  text-decoration: underline;
+  font-family: inherit;
+}
+
+.ask-sheikh-status {
+  text-align: center;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.status-received { background: #eaf1eb; color: #245642; }
+.status-reviewing { background: #fff3cd; color: #856404; }
+.status-replied { background: #d4edda; color: #155724; }
+
+.ask-sheikh-qbox,
+.ask-sheikh-abox {
+  background: #fff;
+  border: 1px solid #e8dfca;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.ask-sheikh-abox {
+  background: #f0f7f2;
+  border-color: #b99a5b;
+}
+
+.ask-sheikh-qbox strong,
+.ask-sheikh-abox strong {
+  display: block;
+  margin-bottom: 4px;
   color: #245642;
 }
 

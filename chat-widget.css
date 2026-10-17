@@ -1,0 +1,184 @@
+/* ========================================
+   Ask Sheikh - Floating Chat Widget
+======================================== */
+
+.ask-sheikh-fab {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #245642, #173f32);
+  color: #e6d0a4;
+  border: none;
+  box-shadow: 0 6px 20px rgba(23, 63, 50, 0.35);
+  cursor: pointer;
+  z-index: 9998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.ask-sheikh-fab:hover {
+  transform: scale(1.08);
+  box-shadow: 0 8px 28px rgba(23, 63, 50, 0.45);
+}
+
+.ask-sheikh-fab .fab-label {
+  position: absolute;
+  bottom: 72px;
+  left: 0;
+  background: #173f32;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 12px;
+  font-size: 13px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  font-family: "Cairo", sans-serif;
+}
+
+.ask-sheikh-fab:hover .fab-label {
+  opacity: 1;
+}
+
+.ask-sheikh-panel {
+  position: fixed;
+  bottom: 100px;
+  left: 24px;
+  width: min(380px, calc(100vw - 40px));
+  max-height: 70vh;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.18);
+  z-index: 9999;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: "Cairo", sans-serif;
+  border: 1px solid #e8dfca;
+}
+
+.ask-sheikh-panel.open {
+  display: flex;
+}
+
+.ask-sheikh-header {
+  background: linear-gradient(135deg, #245642, #173f32);
+  color: #fff;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ask-sheikh-header h4 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.ask-sheikh-header small {
+  display: block;
+  font-size: 11px;
+  opacity: 0.85;
+  margin-top: 2px;
+}
+
+.ask-sheikh-close {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.ask-sheikh-body {
+  padding: 16px;
+  overflow-y: auto;
+  flex: 1;
+  background: #f8f5ee;
+}
+
+.ask-sheikh-body p {
+  margin: 0 0 12px;
+  font-size: 14px;
+  color: #245642;
+  line-height: 1.7;
+}
+
+.ask-sheikh-form label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #245642;
+  margin-bottom: 4px;
+  margin-top: 10px;
+}
+
+.ask-sheikh-form input,
+.ask-sheikh-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e8dfca;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  background: #fff;
+}
+
+.ask-sheikh-form textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.ask-sheikh-submit {
+  width: 100%;
+  margin-top: 14px;
+  padding: 11px;
+  background: #245642;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.ask-sheikh-submit:hover {
+  background: #173f32;
+}
+
+.ask-sheikh-success {
+  text-align: center;
+  padding: 20px 10px;
+  color: #245642;
+}
+
+[data-theme="dark"] .ask-sheikh-panel {
+  background: #12201a;
+  border-color: #1e332a;
+}
+
+[data-theme="dark"] .ask-sheikh-body {
+  background: #0f1a15;
+}
+
+[data-theme="dark"] .ask-sheikh-body p,
+[data-theme="dark"] .ask-sheikh-form label {
+  color: #e6d0a4;
+}
+
+[data-theme="dark"] .ask-sheikh-form input,
+[data-theme="dark"] .ask-sheikh-form textarea {
+  background: #0a1210;
+  border-color: #1e332a;
+  color: #e8efe9;
+}

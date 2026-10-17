@@ -236,15 +236,30 @@
         window.location.href = "index.html";
     }
 
-    function loadQuestions() {
-        let qList = JSON.parse(localStorage.getItem('sheikhQuestions')) || [];
+    let questionsCache = [];
+
+    async function loadQuestions() {
         let container = document.getElementById('questionsContainer');
-        if (qList.length === 0) {
+        container.innerHTML = "<p style='color:#777;'>جارٍ تحميل الأسئلة...</p>";
+
+        if (window.db) {
+            try {
+                const snapshot = await window.db.collection("questions").orderBy("timestamp", "desc").get();
+                questionsCache = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            } catch (e) {
+                console.error(e);
+                questionsCache = JSON.parse(localStorage.getItem('sheikhQuestions')) || [];
+            }
+        } else {
+            questionsCache = JSON.parse(localStorage.getItem('sheikhQuestions')) || [];
+        }
+
+        if (questionsCache.length === 0) {
             container.innerHTML = "<p style='color:#777;'>لا توجد أسئلة جديدة حالياً.</p>";
             return;
         }
         let html = "";
-        qList.forEach((q, index) => {
+        questionsCache.forEach((q, index) => {
             html += `
                 <div style="background: #f8f5ee; border: 1px solid #e8dfca; border-radius: 12px; padding: 15px; margin-bottom: 15px;">
                     <div style="display: flex; justify-content: space-between; font-weight: bold; color: #245642; margin-bottom: 8px; font-size: 14px;">
@@ -262,11 +277,18 @@
         container.innerHTML = html;
     }
 
-    function saveAnswer(index) {
-        let qList = JSON.parse(localStorage.getItem('sheikhQuestions')) || [];
+    async function saveAnswer(index) {
         const answerText = document.getElementById(`answer-${index}`).value.trim();
-        qList[index].answer = answerText;
-        localStorage.setItem('sheikhQuestions', JSON.stringify(qList));
+        const q = questionsCache[index];
+        if (!q) return;
+
+        if (window.db && q.id) {
+            await window.db.collection("questions").doc(q.id).update({ answer: answerText });
+        } else {
+            let qList = JSON.parse(localStorage.getItem('sheikhQuestions')) || [];
+            if (qList[index]) qList[index].answer = answerText;
+            localStorage.setItem('sheikhQuestions', JSON.stringify(qList));
+        }
         alert("تم حفظ رد الشيخ بنجاح!");
         loadQuestions();
     }
@@ -395,6 +417,9 @@
     loadLessonsAdmin();
     loadNewsAdmin();
 </script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
     <script src="theme.js"></script>
 </body>
 </html>
